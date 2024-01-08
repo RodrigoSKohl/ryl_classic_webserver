@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<!--[if lt IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script><![endif]-->
+<title>Path of the Emperor</title>
+<meta name="keywords" content />
+<meta name="description" content />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Philosopher:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="/files/css/swiper-bundle.min.css" rel="stylesheet">
+<link href="/files/css/slick.css" rel="stylesheet">
+<link href="/files/css/style.css" rel="stylesheet">
+<link href="/files/css/mobile-style.css" rel="stylesheet">
+<script src="https://js.hcaptcha.com/1/api.js" async defer type="d71b37dd45387b19f0b019df-text/javascript"></script>
+</head>
+<body>
+<div class="wrapper
+register
+">
+<header>
+<div class="topPanel">
+<div class="btn btn-drop" data-class="topPanel-left">
+<span></span>
+<span></span>
+<span></span>
+</div>
+<div class="topPanel-wrapper flex-c">
+<div class="topPanel-left flex-c">
+<ul class="nav">
+<li><a href="https://playpote.com/main">Homepage</a></li>
+<li><a href="/register">Create Account</a></li>
+<li><a href="/download">Download Center</a></li>
+<li class="sub-menu"><a href="javascript:void(0)">Game Info</a>
+<ul>
+<li><a href="https://wiki.playpote.com" target="_blank">Game Wiki</a></li>
+<li><a href="https://status.playpote.com" target="_blank">Server Status</a></li>
+</ul>
+</li>
+<li class="sub-menu"><a href="javascript:void(0)">Rankings</a>
+<ul>
+<li><a href="/ranking/player">Player Ranking</a></li>
+<li><a href="/ranking/guild">Guild Ranking</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="topPanel-right">
+<a href="#register" class="sign-in open_modal">
+Sign In
+</a>
+</div>
+</div>
+</div>
+<div class="logo">
+<a href class="bright"><img src="/files/images/logo.png" alt="Logo"></a>
+</div>
+</header>
+<style>
+  .alert {
+  padding: 20px;
+  background-color: #f44336; /* Red */
+  color: white;
+  margin-bottom: 15px;
+}
+
+.alert-success {
+  padding: 20px;
+  background-color: #04AA6D; /* Red */
+  color: white;
+  margin-bottom: 15px;
+}
+
+.alert-warning {
+  padding: 20px;
+  background-color: #ff9800; /* Red */
+  color: white;
+  margin-bottom: 15px;
+}
+
+/* The close button */
+.closebtn {
+  margin-left: 15px;
+  color: white;
+  font-weight: bold;
+  float: right;
+  font-size: 22px;
+  line-height: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+/* When moving the mouse over the close button */
+.closebtn:hover {
+  color: black;
+}
+
+/* Estilo específico para checkbox */
+input[type="checkbox"] {
+    width: auto; /* Resetamos a largura para permitir o tamanho padrão do checkbox */
+    height: auto; /* Resetamos a altura para permitir o tamanho padrão do checkbox */
+    background: transparent; /* Fundo transparente para checkbox */
+    border: none; /* Sem bordas para o checkbox */
+    padding: 0; /* Sem padding para o checkbox */
+    margin-right: 10px; /* Espaçamento à direita para caso tenha um label ao lado */
+    cursor: pointer; /* O cursor será uma mãozinha ao passar por cima do checkbox */
+}
+
+/* Estilo para o checkbox quando está marcado */
+input[type="checkbox"]:checked::before {
+    content: '✓'; /* Um símbolo de check */
+    position: absolute;
+    color: #fcedc0; /* Cor branca para o símbolo */
+    font-size: 18px; /* Tamanho do símbolo */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Centralizar o símbolo no meio do checkbox */
+}
+
+/* Se você quiser que o checkbox tenha uma aparência mais customizada (ex: um quadrado com bordas) */
+input[type="checkbox"]::before {
+    content: ''; /* Conteúdo vazio para criar o pseudo-elemento */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 16px; /* Largura do pseudo-elemento */
+    height: 16px; /* Altura do pseudo-elemento */
+    background: #040609; /* Fundo preto, como os outros inputs */
+    border: 1px solid #36383a; /* Bordas como os outros inputs */
+    transform: translate(-50%, -50%); /* Centralizar no meio do input */
+}
+</style>
+<main class="main">
+<div class="mainRegister">
+<div class="regBlock" style="padding: 100px 120px !important;">
+<span class="modalTitle">Create Your Account</span>
+<form action="/register" method="post">
+<input type="hidden" name="_csrf" value="KTuzfEIm-Cc_0M7ImfYYXm7JK52Kz-lXnkCY">
+<div class="fields">
+<div class="fieldGroup" style="margin: 0 0 10px 0 !important">
+<span>Forum Username</span>
+<input type="text" placeholder="Your nickname at our forum" name="username" minlength="5" maxlength="15" pattern="[a-zA-Z0-9]+" required>
+<p class="text-muted">
+<ul>
+<li style="margin: 5px; opacity: 0.5; !important">This is your forum nickname. Use only letters and numbers</li>
+</ul>
+</p>
+</div>
+<div class="fieldGroup" style="margin: 0 0 10px 0 !important">
+<span>Email</span>
+<input type="email" placeholder="your@best-email.com" name="email" required>
+<p class="text-muted">
+<ul>
+<li style="margin: 5px; opacity: 0.5; !important;">* Enter a valid email address for confirmation email.</li>
+<li style="margin: 5px; opacity: 0.5; !important">* Confirm your email in order create the game accounts.</li>
+</ul>
+</p>
+</div>
+<div class="fieldGroup" style="margin: 0 0 10px 0 !important">
+<span>Password</span>
+<input type="password" placeholder="********" " name="password" minlength="8" required>
+<p class="text-muted">
+<ul>
+<li style="margin: 5px; opacity: 0.5; !important">* Must have at least 8 characters.</li>
+</ul>
+</p>
+</div>
+<div class="fieldGroup" style="margin: 0 0 10px 0 !important">
+<span>Confirm password</span>
+<input type="password" placeholder="********" " name="passwordConfirm" minlength="8" required>
+<p class="text-muted">
+<ul>
+<li style="margin: 5px; opacity: 0.5; !important">* Please confirm the password.</li>
+</ul>
+</p>
+</div>
+<div class="fieldGroup" style="margin: 0 0 10px 0 !important">
+Did you have read and accepted your <a href="/terms" target="_blank">terms of use</a>?
+<input type="checkbox" name="term" required> Yes
+<p></p>
+</div>
+<div class="fieldGroup" style="margin: 0 0 10px 0 !important">
+<div class="h-captcha" data-sitekey="ee6418fd-45b9-4644-bcc1-b6237a15d417"></div>
+</div>
+</div>
+<div class="enter flex-s-c">
+<div class="enterLinks">
+<p><a href="/forgot-password" class="forgot">Forgot Password?</a></p> |
+<p><a href="/resend-confirmation-link" class="forgot">Re-send confirmation e-mail</a></p>
+</div>
+</div>
+<button class="big-button-blue" type="submit">Sign In Now</button>
+</div>
+</form>
+</div>
+</main>
+</div>
+<script type="d71b37dd45387b19f0b019df-text/javascript">
+  var close = document.getElementsByClassName("closebtn");
+  var i;
+
+  for (i = 0; i < close.length; i++) {
+    close[i].onclick = function(){
+      var div = this.parentElement;
+      div.style.opacity = "0";
+      div.style.display = "none";
+      setTimeout(function(){ div.style.display = "none"; }, 600);
+    }
+  }
+  </script><footer>
+<div class="wrapper">
+<div class="footerMenu flex">
+<div class="footerMenu-block">
+<div class="h2-title flex-s-c">
+<span>Information</span>
+</div>
+<ul class="f-menu">
+<li><a href="/terms">Terms of Service</a></li>
+<li><a href="/privacy-policy">Privacy Policy</a></li>
+<li><a href="/refund-policy">Refund Policy</a></li>
+</ul>
+</div>
+<div class="footerMenu-block">
+<div class="h2-title flex-s-c">
+<span>How to Start</span>
+</div>
+<ul class="f-menu">
+<li><a href="/download">Download Center</a></li>
+<li><a href="https://wiki.playpote.com">Game Wiki</a></li>
+<li><a href="https://status.playpote.com">Server Status</a></li>
+</ul>
+</div>
+<div class="footerMenu-block">
+<div class="h2-title flex-s-c">
+<span>Community</span>
+</div>
+<ul class="f-menu">
+<li><a href="https://discord.gg/JSEExmGsrs" target="_blank">Discord</a></li>
+<li><a href="https://www.facebook.com/playpoteonline" target="_blank">Facebook</a></li>
+<li><a href="https://youtube.com/@playpoteonline" target="_blank">Youtube</a></li>
+</ul>
+</div>
+<div class="footerMenu-block">
+<div class="h2-title flex-s-c">
+<span>Support</span>
+</div>
+<div class="e-mail" style="margin-bottom: 1px !important; padding-top: 5px !important">
+<p>Need support?</p>
+<a href="https://support.playpote.com" target="_blank">Help Desk</a>
+</div>
+<div class="e-mail" style="margin-bottom: 1px !important; padding-top: 8px !important">
+<p>Contact us</p>
+<a href="/cdn-cgi/l/email-protection#b9ded4f9c9d5d8c0c9d6cddc97dad6d4" target="_blank"><span class="__cf_email__" data-cfemail="f0979db0809c9189809f8495de939f9d">[email&#160;protected]</span></a>
+</div>
+</div>
+</div>
+<span class="line"></span>
+<div class="footerInfo">
+<div class="footerInfo-block flex-s">
+<div class="playments"><img src="/files/images/payments-icon.png" alt="Payments"></div>
+<div class="copy"><span>© 2024</span> - <a href="https://playpote.com">PlayPOTE.com</a> - <span>All rights reserved</span></div>
+</div>
+<div class="f-text">
+Welcome to Path of the Emperor, the official game server by AAT-Games who offer an immersive gaming experience like no other. Our game can be accessed through our downloadable game client, ensuring a smooth and uninterrupted gaming experience. With unlimited functions and capabilities, our game ensures hours of entertainment. Join us for a unique gameplay and stunning graphics that you have never experienced before. Download our game client for free and start playing now.</div>
+</div>
+</div>
+</footer>
+<div class="rightBodyLinks">
+<a href="https://wiki.playpote.com" target="_blank" class="r-wiki"><span><img src="/files/images/wiki-img.png" alt></span>Wiki</a>
+<a href="/shop" class="r-shop"><span><img src="/files/images/shop-img.png" alt></span>Shop</a>
+<a href="https://forum.playpote.com" target="_blank" class="r-forum"><span><img src="/files/images/forum-img.png" alt></span>Forum</a>
+</div>
+<div class="toTop">
+<span>Go to Top</span>
+</div>
+<div id="register" class="modal_div">
+<span class="modal_close"></span>
+<form action="/login" method="post">
+<input type="hidden" name="_csrf" value="KTuzfEIm-Cc_0M7ImfYYXm7JK52Kz-lXnkCY">
+<div class="modalContent">
+<span class="modalTitle">Sign In</span>
+<div class="fields">
+<div class="fieldGroup">
+<span>E-mail</span>
+<input type="email" name="email" placeholder="your@email.com" required>
+</div>
+<div class="fieldGroup">
+<span>Password</span>
+<input type="password" placeholder="******" name="password" required>
+</div>
+<p></p>
+<div class="h-captcha" data-sitekey="ee6418fd-45b9-4644-bcc1-b6237a15d417"></div>
+</div>
+<div class="enter flex-s-c">
+<div class="enterLinks">
+<p><a href="/forgot-password" class="forgot">Forgot Password?</a></p>
+<p><a href="/register" class="sign">Sign Up</a></p>
+</div>
+<button class="button-blue">Sign In Now</button>
+</div>
+</div>
+</form>
+</div>
+<div id="overlay"></div>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="/files/js/jquery-3.5.1.min.js" type="d71b37dd45387b19f0b019df-text/javascript"></script>
+<script src="/files/js/swiper-bundle.min.js" type="d71b37dd45387b19f0b019df-text/javascript"></script>
+<script src="/files/js/slick.min.js" type="d71b37dd45387b19f0b019df-text/javascript"></script>
+<script src="/files/js/global.js" type="d71b37dd45387b19f0b019df-text/javascript"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" type="d71b37dd45387b19f0b019df-text/javascript"></script>
+<script src="/cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="d71b37dd45387b19f0b019df-|49" defer></script></body>
+</html>
