@@ -8,6 +8,7 @@ const app = express();
 const port = process.env.PORT;
 const host = process.env.HOST;
 const hcaptchaSecretKey = process.env.CAPTCHA_SECRET_KEY;
+const hcaptchasite = process.env.HCAPTCHA_SITE;
 
 // Configurações de conexão com o banco de dados
 const dbConfig = {
@@ -120,7 +121,7 @@ app.post('/registrar', async (req, res) => {
 
 // Função para validar o hCaptcha
 async function validateHcaptcha(token) {
-  const response = await fetch('https://hcaptcha.com/siteverify', {
+  const response = await fetch(hcaptchasite, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded',
