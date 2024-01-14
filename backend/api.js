@@ -26,7 +26,7 @@ const dbTable = process.env.DB_TABLE;
 
 // Middleware CORS
 const corsOptions = {
-  origin: '*',//host,
+  origin: '*',//host
   methods: 'GET,POST',
   optionsSuccessStatus: 204, // alguns navegadores 204 não interpretam como erro
 };
@@ -40,7 +40,7 @@ app.use(express.json());
 const pool = new mssql.ConnectionPool(dbConfig);
 
 app.get('/', (req, res) => {
-  res.send('Bem-vindo à minha aplicação!');
+  res.send('API ONLINE');
 });
 
 // Rota para criar um novo usuário
