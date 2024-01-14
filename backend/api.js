@@ -1,11 +1,13 @@
 const express = require('express');
 const cors = require('cors');
 const mssql = require('mssql');
+const fetch = require('node-fetch');
 require('dotenv').config();
 
 const app = express();
 const port = process.env.PORT;
 const host = process.env.HOST;
+const hcaptchaSecretKey = process.env.CAPTCHA_SECRET_KEY;
 
 // Configurações de conexão com o banco de dados
 const dbConfig = {
@@ -44,19 +46,57 @@ app.get('/', (req, res) => {
 // Rota para criar um novo usuário
 app.post('/registrar', async (req, res) => {
   try {
-    const { nome, senha, email } = req.body;
+    const { username, senha, confirmarSenha, email, hcaptchaToken } = req.body;
+
+    // Validar o hCaptcha
+    const isHcaptchaValid = await validateHcaptcha(hcaptchaToken);
+    if (!isHcaptchaValid) {
+      return res.status(400).send('Falha na verificação hCaptcha.');
+    }    
+
+    // Validar o formato do username
+    if (!/^[a-zA-Z0-9]{1,10}$/.test(username)) {
+      return res.status(400).send('Formato inválido para o username.');
+    }
+
+    // Verificar se o username já existe no banco de dados
+    const existingUser = await checkExistingUser(username);
+    if (existingUser) {
+      return res.status(400).send('Username já está em uso.');
+    }
+
+    // Validar a senha
+    if (senha.length < 6) {
+      return res.status(400).send('A senha deve ter pelo menos 6 caracteres.');
+    }
+
+    // Confirmar se as senhas são iguais
+    if (senha !== confirmarSenha) {
+      return res.status(400).send('As senhas não coincidem.');
+    }
+
+    // Validar o formato do email
+    if (!email.includes('@')) {
+      return res.status(400).send('Formato inválido para o email.');
+    }
+
+    // Verificar se o email já existe no banco de dados
+    const existingEmail = await checkExistingEmail(email);
+    if (existingEmail) {
+      return res.status(400).send('Email já está em uso.');
+    }
 
     // Conectar ao banco de dados
     const pool = await mssql.connect(dbConfig);
 
     // Inserir usuário, senha e email na tabela usando consulta parametrizada
     const result = await pool.request()
-      .input('nome', mssql.VarChar(50), nome)
+      .input('username', mssql.VarChar(12), username)
       .input('senha', mssql.VarChar(30), senha)
       .input('email', mssql.VarChar(50), email)
       .query(`
         INSERT INTO ${dbTable} (account, passwd, email)
-        VALUES (@nome, @senha, @email)
+        VALUES (@username, @senha, @email)
       `);
 
     // Imprimir os resultados
@@ -71,6 +111,48 @@ app.post('/registrar', async (req, res) => {
     await mssql.close();
   }
 });
+
+// Função para validar o hCaptcha
+async function validateHcaptcha(token) {
+  const response = await fetch('https://hcaptcha.com/siteverify', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    body: `secret=${hcaptchaSecretKey}&response=${token}`,
+  });
+
+  const data = await response.json();
+  return data.success;
+}
+
+// Função para verificar se o username já existe no banco de dados
+async function checkExistingUser(username) {
+  const pool = await mssql.connect(dbConfig);
+  const result = await pool.request()
+    .input('username', mssql.VarChar(12), username)
+    .query(`
+      SELECT TOP 1 1
+      FROM ${dbTable}
+      WHERE account = @username
+    `);
+
+  return result.recordset.length > 0;
+}
+
+// Função para verificar se o email já existe no banco de dados
+async function checkExistingEmail(email) {
+  const pool = await mssql.connect(dbConfig);
+  const result = await pool.request()
+    .input('email', mssql.VarChar(50), email)
+    .query(`
+      SELECT TOP 1 1
+      FROM ${dbTable}
+      WHERE email = @email
+    `);
+
+  return result.recordset.length > 0;
+}
 
 // Iniciar o servidor
 app.listen(port, () => {
