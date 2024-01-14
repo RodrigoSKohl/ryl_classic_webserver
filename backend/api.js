@@ -44,17 +44,20 @@ app.get('/', (req, res) => {
 // Rota para criar um novo usuário
 app.post('/registrar', async (req, res) => {
   try {
-    console.log(req.body);
     const { nome, senha, email } = req.body;
 
     // Conectar ao banco de dados
-    await mssql.connect(dbConfig);
+    const pool = await mssql.connect(dbConfig);
 
-    // Inserir usuário, senha e email na tabela
-    const result = await mssql.query(`
-      INSERT INTO ${dbTable} (account, passwd, email)
-      VALUES ('${nome}', '${senha}', '${email}')
-    `);
+    // Inserir usuário, senha e email na tabela usando consulta parametrizada
+    const result = await pool.request()
+      .input('nome', mssql.VarChar(50), nome)
+      .input('senha', mssql.VarChar(30), senha)
+      .input('email', mssql.VarChar(50), email)
+      .query(`
+        INSERT INTO ${dbTable} (account, passwd, email)
+        VALUES (@nome, @senha, @email)
+      `);
 
     // Imprimir os resultados
     console.dir(result);
