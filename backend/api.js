@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const mssql = require('mssql');
+const validator = require('validator');
 require('dotenv').config();
 
 const app = express();
@@ -35,31 +36,36 @@ app.use(cors(corsOptions));
 // Middleware para interpretar JSON
 app.use(express.json());
 
+// Criar uma única instância de pool de conexão para ser reutilizada
+const pool = new mssql.ConnectionPool(dbConfig);
 
 app.get('/', (req, res) => {
   res.send('Bem-vindo à minha aplicação!');
 });
 
-
-
 // Rota para criar um novo usuário
 app.post('/registrar', async (req, res) => {
+  let connection;
+
   try {
     const { username, senha, confirmarSenha, email, hcaptchaToken } = req.body;
+
+    // Conectar ao banco de dados utilizando a instância única de pool
+    connection = await pool.connect();
 
     // Validar o hCaptcha
     const isHcaptchaValid = await validateHcaptcha(hcaptchaToken);
     if (!isHcaptchaValid) {
       return res.status(400).send('Falha na verificação hCaptcha.');
-    }    
+    }
 
     // Validar o formato do username
-    if (!/^[a-zA-Z0-9]{1,10}$/.test(username)) {
+    if (!validator.isAlphanumeric(username)) {
       return res.status(400).send('Formato inválido para o username.');
     }
 
     // Verificar se o username já existe no banco de dados
-    const existingUser = await checkExistingUser(username);
+    const existingUser = await checkExistingUser(username, connection);
     if (existingUser) {
       return res.status(400).send('Username já está em uso.');
     }
@@ -75,21 +81,18 @@ app.post('/registrar', async (req, res) => {
     }
 
     // Validar o formato do email
-    if (!email.includes('@')) {
+    if (!validator.isEmail(email)) {
       return res.status(400).send('Formato inválido para o email.');
     }
 
     // Verificar se o email já existe no banco de dados
-    const existingEmail = await checkExistingEmail(email);
+    const existingEmail = await checkExistingEmail(email, connection);
     if (existingEmail) {
       return res.status(400).send('Email já está em uso.');
     }
 
-    // Conectar ao banco de dados
-    const pool = await mssql.connect(dbConfig);
-
     // Inserir usuário, senha e email na tabela usando consulta parametrizada
-    const result = await pool.request()
+    const result = await connection.request()
       .input('username', mssql.VarChar(12), username)
       .input('senha', mssql.VarChar(30), senha)
       .input('email', mssql.VarChar(50), email)
@@ -106,8 +109,10 @@ app.post('/registrar', async (req, res) => {
     console.error('Erro ao criar usuário:', err.message);
     res.status(500).send('Erro interno do servidor.');
   } finally {
-    // Fechar a conexão
-    await mssql.close();
+    // Sempre libere a conexão, mesmo se ocorrer um erro
+    if (connection) {
+      connection.release();
+    }
   }
 });
 
@@ -126,8 +131,7 @@ async function validateHcaptcha(token) {
 }
 
 // Função para verificar se o username já existe no banco de dados
-async function checkExistingUser(username) {
-  const pool = await mssql.connect(dbConfig);
+async function checkExistingUser(username, pool) {
   const result = await pool.request()
     .input('username', mssql.VarChar(12), username)
     .query(`
@@ -140,8 +144,7 @@ async function checkExistingUser(username) {
 }
 
 // Função para verificar se o email já existe no banco de dados
-async function checkExistingEmail(email) {
-  const pool = await mssql.connect(dbConfig);
+async function checkExistingEmail(email, pool) {
   const result = await pool.request()
     .input('email', mssql.VarChar(50), email)
     .query(`
