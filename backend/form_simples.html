@@ -65,7 +65,6 @@
         } else {
           const errorText = await response.text();
           alert(`Erro ao registrar usuário: ${errorText}`);
-          window.hcaptcha.reset(); // Resetar o hCaptcha em caso de erro
         }
       } catch (error) {
         console.error('Erro ao enviar solicitação:', error.message);

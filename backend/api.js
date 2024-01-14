@@ -53,12 +53,6 @@ app.post('/registrar', async (req, res) => {
     // Conectar ao banco de dados utilizando a instância única de pool
     connection = await pool.connect();
 
-    // Validar o hCaptcha
-    const isHcaptchaValid = await validateHcaptcha(hcaptchaToken);
-    if (!isHcaptchaValid) {
-      return res.status(400).send('Falha na verificação hCaptcha.');
-    }
-
     // Validar o formato do username
     if (!validator.isAlphanumeric(username)) {
       return res.status(400).send('Formato inválido para o username.');
@@ -89,6 +83,12 @@ app.post('/registrar', async (req, res) => {
     const existingEmail = await checkExistingEmail(email, connection);
     if (existingEmail) {
       return res.status(400).send('Email já está em uso.');
+    }
+
+    // Validar o hCaptcha
+    const isHcaptchaValid = await validateHcaptcha(hcaptchaToken);
+    if (!isHcaptchaValid) {
+      return res.status(400).send('Falha na verificação hCaptcha.');
     }
 
     // Inserir usuário, senha e email na tabela usando consulta parametrizada
