@@ -29,6 +29,7 @@ const dbTable = process.env.DB_TABLE;
 const corsOptions = {
   origin: '*',//host
   methods: 'GET,POST',
+  allowedHeaders: 'Content-Type',
   optionsSuccessStatus: 204, // alguns navegadores 204 não interpretam como erro
 };
 
