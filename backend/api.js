@@ -41,7 +41,7 @@ app.use(express.json());
 // Criar uma única instância de pool de conexão para ser reutilizada
 const pool = new mssql.ConnectionPool(dbConfig);
 
-app.get('/', (req, res) => {
+app.get('/', (_, res) => {
   res.send('API ONLINE');
 });
 
