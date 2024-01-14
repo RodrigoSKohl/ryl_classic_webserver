@@ -160,6 +160,6 @@ async function checkExistingEmail(email, pool) {
 }
 
 // Iniciar o servidor
-app.listen(port, () => {
+app.listen(port, host, () => {
   console.log(`Servidor rodando em ${host}:${port}`);
 });
