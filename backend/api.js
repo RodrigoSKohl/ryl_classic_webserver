@@ -29,7 +29,7 @@ const dbTable = process.env.DB_TABLE;
 // Middleware CORS
 const corsOptions = {
   origin: '*',//host
-  methods: 'GET,POST',
+  methods: 'GET,POST,OPTIONS',
   allowedHeaders: 'Content-Type',
   optionsSuccessStatus: 204, // alguns navegadores 204 não interpretam como erro
 };
@@ -94,20 +94,31 @@ app.post('/registrar', async (req, res) => {
       return res.status(400).send('Falha na verificação hCaptcha.');
     }
 
-    // Inserir usuário, senha e email na tabela usando consulta parametrizada
-    const result = await connection.request()
-      .input('username', mssql.VarChar(12), username)
-      .input('senha', mssql.VarChar(30), senha)
-      .input('email', mssql.VarChar(50), email)
-      .query(`
-        INSERT INTO ${dbTable} (account, passwd, email)
-        VALUES (@username, @senha, @email)
-      `);
+// Inserir usuário, senha e email na tabela usando consulta parametrizada
+const result = await connection.request()
+  .input('username', mssql.VarChar(12), username)
+  .input('senha', mssql.VarChar(30), senha)
+  .input('email', mssql.VarChar(50), email)
+  .query(`
+    INSERT INTO ${dbTable} (account, passwd, email)
+    OUTPUT Inserted.account, Inserted.email
+    VALUES (@username, @senha, @email)
+  `);
 
-    // Imprimir os resultados
-    console.dir(result);
+// Imprimir os resultados
+if (result.rowsAffected && result.rowsAffected[0] === 1) {
+  const createdUser = result.recordset[0];
 
-    res.status(201).send('Usuário criado com sucesso.');
+  // Logar no console
+  console.log('Usuário criado com sucesso:');
+  console.log('Username:', createdUser.account);
+  console.log('Email:', createdUser.email);
+
+  res.status(201).send(`Usuário registrado com sucesso!\n\nUsername: ${createdUser.account}\nEmail: ${createdUser.email}`);
+} else {
+  console.error('Erro ao criar usuário: Nenhuma linha afetada pela inserção.');
+  res.status(500).send('Erro interno do servidor.');
+}
   } catch (err) {
     console.error('Erro ao criar usuário:', err.message);
     res.status(500).send('Erro interno do servidor.');

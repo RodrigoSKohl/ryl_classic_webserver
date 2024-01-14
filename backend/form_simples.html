@@ -93,12 +93,13 @@
         });
 
         if (response.ok) {
-          alert('Usuário registrado com sucesso!');
-          location.reload(); // Recarrega a página
-        } else {
-          const errorText = await response.text();
-          alert(`Erro ao registrar usuário: ${errorText}`);
-        }
+  const successMessage = await response.text(); // Obtém o conteúdo da resposta
+  alert(`${successMessage}`);
+  location.reload(); // Recarrega a página
+} else {
+  const errorText = await response.text();
+  alert(`Erro ao registrar usuário: ${errorText}`);
+}
       } catch (error) {
         console.error('Erro ao enviar solicitação:', error.message);
         alert('Erro interno do cliente.');
