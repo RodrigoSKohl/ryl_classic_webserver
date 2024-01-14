@@ -39,14 +39,19 @@
   </form>
 
   <script>
-    document.getElementById('registroForm').addEventListener('submit', async function(event) {
+    let hcaptchaToken = null; // Variável para armazenar o token do hCaptcha
+  
+    document.getElementById('registroForm').addEventListener('submit', async function (event) {
       event.preventDefault();
-
+  
       const formData = new FormData(this);
-      const hcaptchaToken = window.hcaptcha.getResponse(); // Obter o token do hCaptcha
-
-      formData.append('hcaptchaToken', hcaptchaToken);
-
+  
+      // Obter o token do hCaptcha apenas se o formulário não tiver erros
+      if (this.checkValidity()) {
+        hcaptchaToken = window.hcaptcha.getResponse();
+        formData.append('hcaptchaToken', hcaptchaToken);
+      }
+  
       try {
         const response = await fetch('http://localhost:3000/registrar', {
           method: 'POST',
@@ -55,9 +60,10 @@
           },
           body: JSON.stringify(Object.fromEntries(formData)),
         });
-
+  
         if (response.ok) {
           alert('Usuário registrado com sucesso!');
+          location.reload(); // Recarrega a página
         } else {
           const errorText = await response.text();
           alert(`Erro ao registrar usuário: ${errorText}`);
