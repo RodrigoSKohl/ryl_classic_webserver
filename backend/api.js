@@ -26,7 +26,7 @@ const dbTable = process.env.DB_TABLE;
 // Middleware CORS
 const corsOptions = {
   origin: '*',//host,
-  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  methods: 'GET,POST',
   optionsSuccessStatus: 204, // alguns navegadores 204 não interpretam como erro
 };
 
