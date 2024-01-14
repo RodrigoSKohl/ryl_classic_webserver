@@ -17,11 +17,13 @@
 
     <label for="senha">Senha:</label>
     <input type="password" id="senha" name="senha" required minlength="6">
+    <span id="senhaError" style="color: red;"></span>
 
     <br>
 
     <label for="confirmarSenha">Confirmar Senha:</label>
     <input type="password" id="confirmarSenha" name="confirmarSenha" required minlength="6">
+    <span id="confirmarSenhaError" style="color: red;"></span>
 
     <br>
 
@@ -39,8 +41,39 @@
   </form>
 
   <script>
+    const senhaInput = document.getElementById('senha');
+    const confirmarSenhaInput = document.getElementById('confirmarSenha');
+    const senhaError = document.getElementById('senhaError');
+
+    senhaInput.addEventListener('input', () => {
+      senhaError.textContent = '';
+    });
+
     document.getElementById('registroForm').addEventListener('submit', async function (event) {
       event.preventDefault();
+
+      // Verificar se as senhas coincidem
+      if (senhaInput.value !== confirmarSenhaInput.value) {
+        senhaError.textContent = 'As senhas não coincidem.';
+        return;
+      }
+
+    // Bloquear cópia/colagem nos campos de senha
+    senhaInput.addEventListener('copy', (event) => {
+      event.preventDefault();
+    });
+
+    senhaInput.addEventListener('paste', (event) => {
+      event.preventDefault();
+    });
+
+    confirmarSenhaInput.addEventListener('copy', (event) => {
+      event.preventDefault();
+    });
+
+    confirmarSenhaInput.addEventListener('paste', (event) => {
+      event.preventDefault();
+    });
 
       const formData = new FormData(this);
 
