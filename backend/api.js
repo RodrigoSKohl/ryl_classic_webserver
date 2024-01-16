@@ -1,10 +1,20 @@
+//lib do server
 const express = require('express');
+//lib do cors(requer configuraçao para segurança)
 const cors = require('cors');
+//lib do sqlexpress
 const mssql = require('mssql');
+//lib do validador de email e usuario
 const validator = require('validator');
+//lib do https para usar certificado SSL
 const https = require('https');
+//lib para ler e gravar arquivos
 const fs = require('fs');
+//lib para ler caminhos
 const path = require('path');
+//lib para gravar logs
+const morgan = require('morgan');
+//variaveis de ambiente(mudar em .env )
 require('dotenv').config();
 
 
@@ -14,6 +24,7 @@ const port = process.env.HTTPS_PORT;
 const localhost = process.env.HOST;
 const hcaptchaSecretKey = process.env.CAPTCHA_SECRET_KEY;
 const hcaptchasite = process.env.HCAPTCHA_SITE;
+const allowedOrigins = process.env.ALLOWED_ORIGINS.split(',');
 
 
 // Configurações do SSL
@@ -38,9 +49,15 @@ const dbConfig = {
 // Nome da tabela a partir da variável de ambiente
 const dbTable = process.env.DB_TABLE;
 
+// Crie um stream de gravação para salvar os logs em um arquivo
+const logStream = fs.createWriteStream('logs.txt', { flags: 'a' });
+// Middleware Morgan para gerar logs HTTP e direcioná-los para o stream de gravação
+app.use(morgan('combined', { stream: logStream }));
+
+
 // Middleware CORS
 const corsOptions = {
-  origin: '*',//host
+  origin: allowedOrigins, //add outras origens caso utilizar
   methods: 'GET,POST,OPTIONS',
   allowedHeaders: 'Content-Type',
   optionsSuccessStatus: 204, // alguns navegadores 204 não interpretam como erro
@@ -56,12 +73,6 @@ const pool = new mssql.ConnectionPool(dbConfig);
 
 app.get('/', (_, res) => {
   res.send('API ONLINE');
-});
-
-//Middleware de Logs
-app.use((req, res, next) => {
-  console.log(`${req.method} ${req.url}`);
-  next();
 });
 
 
