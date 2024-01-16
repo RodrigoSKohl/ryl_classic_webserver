@@ -1,6 +1,6 @@
 //lib do server
 const express = require('express');
-//lib do cors(requer configuraçao para segurança)
+//lib do cors
 const cors = require('cors');
 //lib do sqlexpress
 const mssql = require('mssql');
@@ -19,9 +19,9 @@ require('dotenv').config();
 
 
 const app = express();
-const localport = process.env.PORT
+const localport = process.env.LOCAL_PORT
 const port = process.env.HTTPS_PORT;
-const localhost = process.env.HOST;
+const localhost = process.env.LOCAL_HOST;
 const hcaptchaSecretKey = process.env.CAPTCHA_SECRET_KEY;
 const hcaptchasite = process.env.HCAPTCHA_SITE;
 const allowedOrigins = process.env.ALLOWED_ORIGINS.split(',');
@@ -56,8 +56,9 @@ app.use(morgan('combined', { stream: logStream }));
 
 
 // Middleware CORS
+const allOrigins = [...allowedOrigins, ...localhost]; //add outras origens em env caso utilizar, por padrao add locoalhost na array
 const corsOptions = {
-  origin: allowedOrigins, //add outras origens caso utilizar
+  origin: allOrigins, 
   methods: 'GET,POST,OPTIONS',
   allowedHeaders: 'Content-Type',
   optionsSuccessStatus: 204, // alguns navegadores 204 não interpretam como erro
@@ -204,15 +205,16 @@ async function checkExistingEmail(email, pool) {
 // Crie o servidor HTTPS usando o Express
 const server = https.createServer(sslOptions, app);
 
-// Iniciar o servidor local
-//Utilze NKGROK OU LOCALTUNNEL para acessar pelo host local
+// Iniciar o servidor local - para testes
+//Utilze NKGROK OU LOCALTUNNEL para acessar pelo host local publicamente
 app.listen(localport, localhost, () => {
   console.log(`Servidor rodando localmente em ${localhost}:${localport}`);
 });
+
 
 //FORÇA ACEITAR CERTIFICADO NAO VERIFICADO, NÃO UTILIZAR EM PRODUCAO
 process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0;
 // Inicie o servidor HTTPS
 server.listen(port, () => {
-  console.log(`Servidor Express rodando em HTTPS na porta ${port}`);
+  console.log(`Servidor Express rodando em todas interfaces de rede em HTTPS na porta ${port}`);
 });
