@@ -2,13 +2,25 @@ const express = require('express');
 const cors = require('cors');
 const mssql = require('mssql');
 const validator = require('validator');
+const https = require('https');
+const fs = require('fs');
+const path = require('path');
 require('dotenv').config();
 
+
 const app = express();
-const port = process.env.PORT;
-const host = process.env.HOST;
+const localport = process.env.PORT
+const port = process.env.HTTPS_PORT;
+const localhost = process.env.HOST;
 const hcaptchaSecretKey = process.env.CAPTCHA_SECRET_KEY;
 const hcaptchasite = process.env.HCAPTCHA_SITE;
+
+
+// Configurações do SSL
+const sslOptions = {
+  key: fs.readFileSync(path.resolve(__dirname, 'server-key.pem')),
+  cert: fs.readFileSync(path.resolve(__dirname, 'server-cert.pem'))
+};
 
 // Configurações de conexão com o banco de dados
 const dbConfig = {
@@ -45,6 +57,13 @@ const pool = new mssql.ConnectionPool(dbConfig);
 app.get('/', (_, res) => {
   res.send('API ONLINE');
 });
+
+//Middleware de Logs
+app.use((req, res, next) => {
+  console.log(`${req.method} ${req.url}`);
+  next();
+});
+
 
 // Rota para criar um novo usuário
 app.post('/registrar', async (req, res) => {
@@ -170,7 +189,19 @@ async function checkExistingEmail(email, pool) {
   return result.recordset.length > 0;
 }
 
-// Iniciar o servidor
-app.listen(port, host, () => {
-  console.log(`Servidor rodando em ${host}:${port}`);
+
+// Crie o servidor HTTPS usando o Express
+const server = https.createServer(sslOptions, app);
+
+// Iniciar o servidor local
+//Utilze NKGROK OU LOCALTUNNEL para acessar pelo host local
+app.listen(localport, localhost, () => {
+  console.log(`Servidor rodando localmente em ${localhost}:${localport}`);
+});
+
+//FORÇA ACEITAR CERTIFICADO NAO VERIFICADO, NÃO UTILIZAR EM PRODUCAO
+process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0;
+// Inicie o servidor HTTPS
+server.listen(port, () => {
+  console.log(`Servidor Express rodando em HTTPS na porta ${port}`);
 });

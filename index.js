@@ -31,7 +31,7 @@ const senhaInput = document.getElementById('senha');
           formData.append('hcaptchaToken', hcaptchaToken);
         }
 
-        const response = await fetch('http://191.220.202.47:5000/registrar', {
+        const response = await fetch('https://192.168.94.110:3001/registrar', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
