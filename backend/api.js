@@ -1,3 +1,4 @@
+//IMPORTS
 //lib do server
 const express = require('express');
 //lib do cors
@@ -15,26 +16,10 @@ const path = require('path');
 //lib dos cookies
 const cookieParser = require('cookie-parser');
 const csrf = require('csurf');
+//lib que limita criaçao de usuarios para nao sobrecarregar API
+const rateLimit = require('express-rate-limit');
 //variaveis de ambiente(mudar em .env )
 require('dotenv').config();
-
-//Setup Express
-const app = express();
-app.use(express.json()); 
-app.use(express.static(path.join(__dirname, 'public')));
-// Set up view engine
-app.set('view engine', 'ejs');
-const localport = process.env.LOCAL_PORT
-const port = process.env.HTTPS_PORT;
-const localhost = process.env.LOCAL_HOST;
-//Variaveis do SK do Captcha e Site
-const hcaptchaSecretKey = process.env.CAPTCHA_SECRET_KEY;
-const hcaptchasite = process.env.HCAPTCHA_SITE;
-// Origens do CORS
-const allowedOrigins = process.env.ALLOWED_ORIGINS.split(',');
-// Nome da tabela a partir da variável de ambiente
-const dbTable = process.env.DB_TABLE;
-
 
 // Configurações do SSL
 const sslOptions = {
@@ -42,7 +27,9 @@ const sslOptions = {
   cert: fs.readFileSync(path.resolve(__dirname, 'server-cert.pem'))
 };
 
+
 // Configurações de conexão com o banco de dados
+const dbTable = process.env.DB_TABLE; // Nome da tabela a partir da variável de ambiente
 const dbConfig = {
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
@@ -54,18 +41,34 @@ const dbConfig = {
     trustServerCertificate: true,  // Desabilitar a validação do certificado
   },
 };
-
 // Criar uma única instância de pool de conexão para ser reutilizada
 const pool = new mssql.ConnectionPool(dbConfig);
 
 
+//Variaveis do SK do Captcha e Site
+const hcaptchaSecretKey = process.env.CAPTCHA_SECRET_KEY;
+const hcaptchasite = process.env.HCAPTCHA_SITE;
+//Setup Express
+const localport = process.env.LOCAL_PORT
+const port = process.env.HTTPS_PORT;
+const localhost = process.env.LOCAL_HOST;
+const app = express();
+//Middleware para ler JSON
+app.use(express.json());
+// Set up view engine
+app.use(express.static(path.join(__dirname, 'public')));
+app.set('view engine', 'ejs');
+// Configuração do Rate Limiting
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutos
+  max: 5, // Limite de 5 solicitações por IP
+  message: 'Muitas solicitações a partir deste IP. Tente novamente mais tarde.',
+});
 // Middlewares csrf
 app.use(cookieParser()); // Add cookie parser middleware
 const csrfProtect = csrf({ cookie: true }); //CSRF protection confs
-app.use(express.urlencoded({ extended: false })); // 'application/x-www-form-urlencoded'
-
-
 // Middleware CORS
+const allowedOrigins = process.env.ALLOWED_ORIGINS.split(','); // Origens do CORS
 const corsOptions = {
   origin: allowedOrigins, 
   methods: 'GET,POST,OPTIONS',
@@ -73,10 +76,12 @@ const corsOptions = {
   credentials: true,
   optionsSuccessStatus: 204, // alguns navegadores 204 não interpretam como erro
 };
-app.use(cors(corsOptions)); 
+app.use(cors(corsOptions));
 
+//ROTAS//
 
-app.get('/register', csrfProtect, function(req, res) {
+//Rota de registro
+app.get('/register', limiter, csrfProtect, function(req, res) {
   // Generate a token and send it to the view
   res.render('register', { csrfToken: req.csrfToken() });
 });
@@ -92,7 +97,8 @@ app.post('/api/register', csrfProtect, async (req, res) => {
 
     // Conectar ao banco de dados utilizando a instância única de pool
     connection = await pool.connect();
-
+    
+    //array de erros
     const errors = [];
 
     // Validar o formato do username
@@ -214,7 +220,6 @@ async function checkExistingEmail(email, pool) {
 
   return result.recordset.length > 0;
 }
-
 
 // Crie o servidor HTTPS usando o Express
 const server = https.createServer(sslOptions, app);
