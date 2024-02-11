@@ -1,45 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="utf-8" />
-<title>RYL Classic</title>
-<meta name="keywords" content />
-<meta name="description" content />
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="preconnect" href="https://fonts.gstatic.com">
-<link rel="icon" href="/favicon.ico" type="image/x-icon" />
-<link href="https://fonts.googleapis.com/css2?family=Philosopher:wght@400;700&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
-<link href="/styles/style.css" rel="stylesheet">
-<link href="/styles/mobile-style.css" rel="stylesheet">
-<script src="https://js.hcaptcha.com/1/api.js" async defer></script>
-<script src="/scripts/register.js" defer></script>
-</head>
+  <%- include('head'); %>
 <body>
-<div class="wrapper
-register
-">
-<header>
-  <div class="hand-animation">
-    <div class="light-hand"></div>
-    <div class="rune-hand"></div>
-    </div>
-    <div class="sparks">
-    <div class="spark_1"></div>
-    <div class="spark_2"></div>
-    <div class="spark_3"></div>
-    <div class="spark_4 spark-big"></div>
-    </div>
-    <div class="logo">
-    <a href class="bright"><img src="/images/logo.png" alt="Logo"></a>
-    </div>
-</header>
+<div class="wrapper register">
+  <%- include('header'); %>
 <main class="main">
 <div class="mainRegister">
 <div class="regBlock" style="padding: 100px 120px !important;">
 <span class="modalTitle">Create Your Account</span>
 <div id="message-container"></div>
 <form id="registroForm">
+<!-- Campo csrf -->
 <input type="hidden" name="_csrf" value="<%= csrfToken %>">
 <div class="fields">
 <div class="fieldGroup" style="margin: 0 0 10px 0 !important">
@@ -47,7 +18,7 @@ register
 <input type="text" id="username" name="username" placeholder="your nickname" required maxlength="12" pattern="[a-zA-Z0-9]+">
 <p class="text-muted">
 <ul>
-<li style="margin: 5px; opacity: 0.5; !important">* This is your nickname. Use only letters and numbers</li>
+<li style="margin: 5px; opacity: 0.5 !important">* This is your nickname. Use only letters and numbers</li>
 </ul>
 </p>
 </div>
@@ -56,7 +27,7 @@ register
 <input type="email" id="email" placeholder="mail@domain.com" name="email" required>
 <p class="text-muted">
 <ul>
-<li style="margin: 5px; opacity: 0.5; !important;">* Enter a valid email address for confirmation email.</li>
+<li style="margin: 5px; opacity: 0.5 !important;">* Enter a valid email address for confirmation email.</li>
 </ul>
 </p>
 </div>
@@ -65,7 +36,7 @@ register
 <input type="password" id="senha" placeholder="******" name="senha" required minlength="6">
 <p class="text-muted">
 <ul>
-<li style="margin: 5px; opacity: 0.5; !important">* Must have at least 6 characters.</li>
+<li style="margin: 5px; opacity: 0.5 !important">* Must have at least 6 characters.</li>
 </ul>
 </p>
 </div>
@@ -74,7 +45,7 @@ register
 <input type="password" id="confirmarSenha" name="confirmarSenha" placeholder="******" required minlength="6">
 <p class="text-muted">
 <ul>
-<li style="margin: 5px; opacity: 0.5; !important">*Please confirm the password.</li>
+<li style="margin: 5px; opacity: 0.5 !important">*Please confirm the password.</li>
 </ul>
 </p>
 </div>
@@ -89,20 +60,5 @@ register
 </div>
 </main>
 </div>
-  
-<footer>
-<div class="wrapper">
-<div class="footerMenu flex">
-Aqui colocar social pages
-</div>
-<span class="line"></span>
-<div class="footerInfo">
-<div class="footerInfo-block flex-s">
-<div class="copy"><span>© 2024</span> - <a href="https://dominio.com">Dominio.com</a> - <span>All rights reserved</span></div>
-</div>
-<div class="f-text">
-SEO Google!
-</div>
-</div>
-</footer>
+  <%- include('footer'); %>
 </html>

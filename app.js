@@ -8,6 +8,10 @@ const fs = require('fs');
 //lib para ler caminhos
 const path = require('path');
 require('dotenv').config();
+//lib das sessoes
+const session = require('express-session');
+//lib de geracao de HASH(por enquanto somente usado para o express session)
+const crypto = require('crypto');
 
 // Configurações do SSL
 const sslOptions = {
@@ -20,11 +24,15 @@ const localport = process.env.LOCAL_PORT
 const port = process.env.HTTPS_PORT;
 const localhost = process.env.LOCAL_HOST;
 const app = express();
+//inicializar o sessionkey
+const sessionkey = crypto.randomBytes(32).toString('hex');
+app.use(session({ secret: sessionkey, resave: false, saveUninitialized: true }));
 //tratar JSON
 app.use(express.json());
 //Engine Static
 app.use(express.static(path.join(__dirname, 'public')));
 app.set('view engine', 'ejs');
+
 
 //lib do cors
 const corsMiddleware = require('./middlewares/corsMiddleware');

@@ -10,7 +10,7 @@ const validator = require('validator');
 const  validateHcaptchaMiddleware  = require('../../middlewares/hcaptchaMiddleware');
 const dbTable = process.env.DB_TABLE; // Nome da tabela a partir da variável de ambiente
 
-router.post('/api/register',  async (req, res) => {
+router.post('/api/register', validateHcaptchaMiddleware,  async (req, res) => {
   let connection;
 
   try {
@@ -59,8 +59,6 @@ router.post('/api/register',  async (req, res) => {
       return res.status(400).json({ errors });
     }
 
-    // Chamar o middleware do hCaptcha
-    validateHcaptchaMiddleware(req, res, async () => {});
 
     // Inserir usuário, senha e email na tabela usando consulta parametrizada
     const result = await connection.request()
@@ -81,6 +79,9 @@ router.post('/api/register',  async (req, res) => {
       console.log('Usuário criado com sucesso:');
       console.log('Username:', createdUser.account);
       console.log('Email:', createdUser.email);
+
+        // Resetar a validação do hCaptcha na sessão
+      req.session.hcaptchaValidated = false;
 
       res.status(201).json({ success: 'Usuário registrado com sucesso!', user: createdUser });
     } else {
