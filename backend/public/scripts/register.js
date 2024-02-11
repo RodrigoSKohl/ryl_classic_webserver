@@ -7,7 +7,6 @@ document.getElementById('registroForm').addEventListener('submit', async functio
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'CSRF-Token': document.querySelector('input[name="_csrf"]').value,
         },
         body: JSON.stringify(Object.fromEntries(formData)),
 
