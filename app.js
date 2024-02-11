@@ -32,11 +32,14 @@ app.set('view engine', 'ejs');
 const corsMiddleware = require('./middlewares/corsMiddleware');
 const limiter = require('./middlewares/limiter');
 const csrfProtect = require('./middlewares/csrfProtect');
+const checkRegisterAccessMiddleware = require('./middlewares/checkRegisterAccessMiddleware');
+
 
 //ROTAS//
 const register = require('./routes/register');
 const registerAPI = require('./routes/api/register');
-app.use('/', corsMiddleware, csrfProtect, limiter, register, registerAPI);
+//rota de registro
+app.use('/', limiter, corsMiddleware, csrfProtect, register, checkRegisterAccessMiddleware, registerAPI);
 
 // Iniciar o servidor local
 app.listen(localport, () => {
