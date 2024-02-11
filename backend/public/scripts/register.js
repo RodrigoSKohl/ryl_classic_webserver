@@ -17,8 +17,8 @@ document.getElementById('registroForm').addEventListener('submit', async functio
         if (data.success) {
             document.getElementById('registroForm').reset();
             messageContainer.innerHTML = `<p class="success">${data.success}</p>`;
-        } else if (data.error || (data.errors && data.errors.length > 0)) {
             window.hcaptcha.reset(); 
+        } else if (data.error || (data.errors && data.errors.length > 0)) {
             messageContainer.innerHTML = '';
             
             if (data.error) {

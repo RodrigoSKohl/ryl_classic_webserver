@@ -89,12 +89,6 @@ app.post('/api/register', csrfProtect, async (req, res) => {
   try {
     const { username, senha, confirmarSenha, email, 'h-captcha-response': hcaptchaToken } = req.body;
 
-    // Validar o hCaptcha
-    const isHcaptchaValid = await validateHcaptcha(hcaptchaToken);
-    if (!isHcaptchaValid) {
-      return res.status(400).json({ error: 'Falha na verificação hCaptcha.' });
-    }
-
 
     // Conectar ao banco de dados utilizando a instância única de pool
     connection = await pool.connect();
@@ -137,6 +131,12 @@ app.post('/api/register', csrfProtect, async (req, res) => {
     if (errors.length > 0) {
        return res.status(400).json({ errors });
     }
+
+        // Validar o hCaptcha
+        const isHcaptchaValid = await validateHcaptcha(hcaptchaToken);
+        if (!isHcaptchaValid) {
+          return res.status(400).json({ error: 'Falha na verificação hCaptcha.' });
+        }
 
 
     // Inserir usuário, senha e email na tabela usando consulta parametrizada
