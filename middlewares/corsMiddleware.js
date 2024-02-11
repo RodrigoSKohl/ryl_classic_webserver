@@ -1,8 +1,7 @@
 //middlewares/corsMiddleware.js
 const cors = require('cors');
 
-const allowedOrigins = process.env.ALLOWED_ORIGINS.split(','); // Origens do CORS
-
+const allowedOrigins = (process.env.ALLOWED_ORIGINS || '').split(','); //origens do cors
 const corsOptions = {
   origin: allowedOrigins, 
   methods: 'GET,POST,OPTIONS',
