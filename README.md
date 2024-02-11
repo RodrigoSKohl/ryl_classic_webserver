@@ -1,4 +1,4 @@
-````.
+``.
 └── root/
     ├── certificate
     ├── middlewares
@@ -8,4 +8,4 @@
     │   ├── scripts
     │   └── styles
     ├── routes
-    └── views```
+    └── views``
