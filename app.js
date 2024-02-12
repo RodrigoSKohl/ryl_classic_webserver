@@ -21,6 +21,14 @@ const sslOptions = {
 const localport = process.env.LOCAL_PORT;
 const port = process.env.HTTPS_PORT;
 const localhost = process.env.LOCAL_HOST;
+
+//custom conf libs
+const corsMiddleware = require('./middlewares/corsMiddleware');
+const limiter = require('./middlewares/limiter');
+const csrfProtect = require('./middlewares/csrfProtect');
+const checkRegisterAccessMiddleware = require('./middlewares/checkRegisterAccessMiddleware');
+
+//start express
 const app = express();
 const sessionkey = crypto.randomBytes(32).toString('hex');
 app.use(session({ secret: sessionkey, resave: false, saveUninitialized: true }));
@@ -28,11 +36,7 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 app.set('view engine', 'ejs');
 
-//custom conf libs
-const corsMiddleware = require('./middlewares/corsMiddleware');
-const limiter = require('./middlewares/limiter');
-const csrfProtect = require('./middlewares/csrfProtect');
-const checkRegisterAccessMiddleware = require('./middlewares/checkRegisterAccessMiddleware');
+
 
 
 //ROTAS//

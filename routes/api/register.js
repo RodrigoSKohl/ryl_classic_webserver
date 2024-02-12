@@ -10,6 +10,9 @@ const validator = require('validator');
 const  validateHcaptchaMiddleware  = require('../../middlewares/hcaptchaMiddleware');
 const dbTable = process.env.DB_TABLE; // Nome da tabela a partir da variável de ambiente
 
+
+
+
 router.post('/api/register', validateHcaptchaMiddleware,  async (req, res) => {
   let connection;
 
@@ -22,16 +25,6 @@ router.post('/api/register', validateHcaptchaMiddleware,  async (req, res) => {
     // Array de erros
     const errors = [];
 
-    // Validar o formato do username
-    if (!validator.isAlphanumeric(username)) {
-      errors.push('Formato inválido para o username.');
-    }
-
-    // Verificar se o username já existe no banco de dados
-    const existingUser = await checkExistingUser(username, connection, mssql, dbTable);
-    if (existingUser) {
-      errors.push('Username já está em uso.');
-    }
 
     // Validar a senha
     if (senha.length < 6) {
@@ -43,9 +36,20 @@ router.post('/api/register', validateHcaptchaMiddleware,  async (req, res) => {
       errors.push('As senhas não coincidem.');
     }
 
+    // Validar o formato do username
+    if (!validator.isAlphanumeric(username)) {
+      errors.push('Formato inválido para o username.');
+    }
+
     // Validar o formato do email
     if (!validator.isEmail(email)) {
       errors.push('Formato inválido para o email.');
+    }
+
+    // Verificar se o username já existe no banco de dados
+    const existingUser = await checkExistingUser(username, connection, mssql, dbTable);
+    if (existingUser) {
+        errors.push('Username já está em uso.');
     }
 
     // Verificar se o email já existe no banco de dados

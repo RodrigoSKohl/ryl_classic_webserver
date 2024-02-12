@@ -1,4 +1,4 @@
-// models/index.js
+// models/connnect.js
 const mssql = require('mssql');
 const dbConfig = {
   user: process.env.DB_USER,

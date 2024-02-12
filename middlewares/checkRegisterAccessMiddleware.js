@@ -1,10 +1,15 @@
 // checkRegisterAccessMiddleware.js
 
 const checkRegisterAccess = (req, res, next) => {
-    if (req.baseUrl === '/api/register') {
-      return res.status(403).json({ error: 'Acesso proibido diretamente a esta rota.' });
-    }
-    next();
-  };
-  
-  module.exports = checkRegisterAccess;
+  const isRegister = req.path.endsWith('/register');
+  const isAPIRegister = req.path .endsWith('/api/register');
+  const isOriginFromRegister = req.headers.referer && req.headers.referer.endsWith('/register');
+
+  if ((isAPIRegister && !isOriginFromRegister) || !isRegister) {
+    return res.status(403).json({ error: 'Acesso proibido diretamente a esta rota.' });
+  }
+
+  next();
+};
+
+module.exports = checkRegisterAccess;
