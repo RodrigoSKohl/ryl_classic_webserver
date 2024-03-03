@@ -14,7 +14,7 @@ async function validateHcaptchaMiddleware(req, res, next) {
 
   if (!isHcaptchaValid) {
     // Se a validação falhar, retorne uma resposta de erro
-    return res.status(400).json({ error: 'Falha na verificação hCaptcha.' });
+    return res.status(400).json({ error: 'hCaptcha verified failed' });
   }
 
   // Marcar a validação do hCaptcha como concluída na sessão

@@ -40,10 +40,13 @@ app.set('view engine', 'ejs');
 
 
 //ROTAS//
+const index = require('./routes/index');
 const register = require('./routes/register');
 const registerAPI = require('./routes/api/register');
+
 //rota de registro
-app.use('/', limiter, corsMiddleware, csrfProtect, register, checkRegisterAccessMiddleware, registerAPI);
+app.use('/', limiter, corsMiddleware, index);
+//app.use('/', limiter, corsMiddleware, csrfProtect, register, checkRegisterAccessMiddleware, registerAPI);
 
 // Iniciar o servidor local
 app.listen(localport, () => {
