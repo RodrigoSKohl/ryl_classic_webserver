@@ -1,10 +1,10 @@
+require('dotenv').config({path:'C:/Users/rodri/Área de Trabalho/scrap_PoE/.env'})
 const express = require('express');
 const https = require('https');
 const fs = require('fs');
 const path = require('path');
 const session = require('express-session');
 const crypto = require('crypto');
-require('dotenv').config();
 
 // Configurações do SSL
 if (process.env.LOCAL_DEV === 'true') {
@@ -46,7 +46,7 @@ const registerAPI = require('./routes/api/register');
 
 //rota de registro
 app.use('/', limiter, corsMiddleware, index);
-//app.use('/', limiter, corsMiddleware, csrfProtect, register, checkRegisterAccessMiddleware, registerAPI);
+app.use('/', limiter, corsMiddleware, csrfProtect, register, checkRegisterAccessMiddleware, registerAPI);
 
 // Iniciar o servidor local
 app.listen(localport, () => {
