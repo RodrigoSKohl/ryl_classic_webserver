@@ -6,7 +6,8 @@ const checkRegisterAccess = (req, res, next) => {
   const isOriginFromRegister = req.headers.referer && req.headers.referer.endsWith('/register');
 
   if ((isAPIRegister && !isOriginFromRegister) || !isRegister) {
-    return res.status(403).json({ error: 'Acccess Denied' });
+    // Redirecionar para o root ("/")
+    return res.redirect('/');
   }
 
   next();
