@@ -14,6 +14,7 @@ if (process.env.LOCAL_DEV === 'true') {
 const sslOptions = {
   key: fs.readFileSync(path.resolve(__dirname, 'certificate', 'server-key.pem')),
   cert: fs.readFileSync(path.resolve(__dirname, 'certificate', 'server-cert.pem')),
+  passphrase: process.env.DB_PASSWORD, 
   rejectUnauthorized: process.env.LOCAL_DEV !== 'true'
 };
 
@@ -27,6 +28,7 @@ const corsMiddleware = require('./middlewares/corsMiddleware');
 const limiter = require('./middlewares/limiter');
 const csrfProtect = require('./middlewares/csrfProtect');
 const checkRegisterAccessMiddleware = require('./middlewares/checkRegisterAccessMiddleware');
+const blockDirectIPAccess = require('./middlewares/blockDirectIPAccess');
 
 //start express
 const app = express();
@@ -34,6 +36,7 @@ const sessionkey = crypto.randomBytes(32).toString('hex');
 app.use(session({ secret: sessionkey, resave: false, saveUninitialized: true }));
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
+app.set('trust proxy', true);
 app.set('view engine', 'ejs');
 
 
@@ -45,11 +48,11 @@ const register = require('./routes/register');
 const registerAPI = require('./routes/api/register');
 
 //rota de registro
-app.use('/', limiter, corsMiddleware, index);
-app.use('/', limiter, corsMiddleware, csrfProtect, register, checkRegisterAccessMiddleware, registerAPI);
+app.use('/', limiter, blockDirectIPAccess, corsMiddleware, index);
+app.use('/', limiter, blockDirectIPAccess, corsMiddleware, csrfProtect, register, checkRegisterAccessMiddleware, registerAPI);
 
 // Iniciar o servidor local
-app.listen(localport, () => {
+app.listen(localport, localhost, () => {
   console.log(`Servidor rodando localmente em ${localhost}:${localport}`);
 });
 
