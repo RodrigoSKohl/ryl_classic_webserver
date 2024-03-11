@@ -47,8 +47,9 @@ const index = require('./routes/index');
 const register = require('./routes/register');
 const registerAPI = require('./routes/api/register');
 
-//rota de registro
+//rota registro
 app.use('/', limiter, blockDirectIPAccess, corsMiddleware, index);
+//rota de registro
 app.use('/', limiter, blockDirectIPAccess, corsMiddleware, csrfProtect, register, checkRegisterAccessMiddleware, registerAPI);
 
 // Iniciar o servidor local

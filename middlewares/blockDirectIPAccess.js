@@ -3,6 +3,12 @@
 const blockDirectIPAccess = (req, res, next) => {
   console.log('Middleware: Início do processamento');
 
+  // Verifica se o IP é localhost
+  if (req.headers.host.includes(`${process.env.LOCAL_HOST}:${process.env.LOCAL_PORT}`)) {
+    console.log('localhost não executa o middleware');
+    return next(); // Pula a execução do middleware
+  }
+
   const allowedOrigins = (process.env.ALLOWED_ORIGINS || '').split(',');
   const firstDomain = allowedOrigins[0];
 
