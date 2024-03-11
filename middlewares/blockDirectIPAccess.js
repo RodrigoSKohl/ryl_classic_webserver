@@ -1,33 +1,28 @@
 // blockDirectIPAccess.js
 
+const ip = require('ip');
+
 const blockDirectIPAccess = (req, res, next) => {
   console.log('Middleware: Início do processamento');
 
-  // Verifica se o IP é localhost
-  if (req.headers.host.includes(`${process.env.LOCAL_HOST}:${process.env.LOCAL_PORT}`)) {
-    console.log('localhost não executa o middleware');
-    return next(); // Pula a execução do middleware
-  }
-
   const allowedOrigins = (process.env.ALLOWED_ORIGINS || '').split(',');
   const firstDomain = allowedOrigins[0];
+  const isIP = ip.isV4Format(req.headers.host) || ip.isV6Format(req.headers.host);
 
+  // Função para redirecionar para o primeiro domínio
   const redirectToFirstDomain = () => {
     console.log('Middleware: Redirecionando para o primeiro domínio');
     return res.redirect(301, `https://${firstDomain}${req.url}`);
   };
 
-  // Verifica se o header "host" está presente na solicitação
-  if (!req.headers.host) {
-    console.log('Middleware: Header "host" não presente');
+
+  if (isIP || !req.headers.host) {
+    console.log('Middleware: Acesso negado');
     return redirectToFirstDomain();
   }
 
-  // Verifica se o hostname corresponde a pelo menos uma das origens permitidas
-  if (!allowedOrigins.includes(req.headers.host)) {
-    console.log(`Middleware: Host não permitido - ${req.headers.host}`);
-    return redirectToFirstDomain();
-  }
+  console.log('Middleware: Acesso permitido');
+  next(); // Continua a execução do middleware
 };
 
 // Exporta a função do middleware
