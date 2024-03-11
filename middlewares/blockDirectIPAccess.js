@@ -28,10 +28,6 @@ const blockDirectIPAccess = (req, res, next) => {
     console.log(`Middleware: Host não permitido - ${req.headers.host}`);
     return redirectToFirstDomain();
   }
-
-  // Se tudo estiver correto, continua para a próxima middleware
-  console.log('Middleware: Condições atendidas, continua para a próxima middleware');
-  next();
 };
 
 // Exporta a função do middleware

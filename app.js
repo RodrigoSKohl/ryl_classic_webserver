@@ -1,4 +1,4 @@
-require('dotenv').config({path:'C:/Users/rodri/Área de Trabalho/scrap_PoE/.env'})
+require('dotenv').config({path:'C:/site/.env'})
 const express = require('express');
 const https = require('https');
 const fs = require('fs');
@@ -46,11 +46,12 @@ app.set('view engine', 'ejs');
 const index = require('./routes/index');
 const register = require('./routes/register');
 const registerAPI = require('./routes/api/register');
-
-//rota registro
-app.use('/', limiter, blockDirectIPAccess, corsMiddleware, index);
+//middlewaress globais
+app.use(blockDirectIPAccess, limiter, corsMiddleware)
+//rota index
+app.use('/' ,index);
 //rota de registro
-app.use('/', limiter, blockDirectIPAccess, corsMiddleware, csrfProtect, register, checkRegisterAccessMiddleware, registerAPI);
+app.use('/', csrfProtect, register, checkRegisterAccessMiddleware, registerAPI);
 
 // Iniciar o servidor local
 app.listen(localport, localhost, () => {
