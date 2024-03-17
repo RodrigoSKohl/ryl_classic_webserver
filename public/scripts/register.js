@@ -18,6 +18,7 @@ document.getElementById('registroForm').addEventListener('submit', async functio
             document.getElementById('registroForm').reset();
             messageContainer.innerHTML = `<p class="success">${data.success}</p>`;
             window.hcaptcha.reset(); 
+            showSuccessModal(); // Mostrar o modal de sucesso
         } else if (data.error || (data.errors && data.errors.length > 0)) {
             messageContainer.innerHTML = '';
             
@@ -31,11 +32,35 @@ document.getElementById('registroForm').addEventListener('submit', async functio
                     messageContainer.innerHTML += `<p class="error">${error}</p>`;
                 });
             }
+            showErrorModal(); // Mostrar o modal de erro
         }
     })
     .catch(error => {
         console.error('Erro:', error);
         messageContainer.innerHTML = '<p class="error">Erro interno do servidor.</p>';
+        showErrorModal(); // Mostrar o modal de erro
+    });
+
+
+
+// Função para mostrar o modal de sucesso
+function showSuccessModal() {
+    var successModal = document.getElementById("successModal");
+    successModal.style.display = "block";
+  }
+  
+  // Função para mostrar o modal de erro
+  function showErrorModal() {
+    var errorModal = document.getElementById("successModal");
+    errorModal.style.display = "block";
+  }
+  
+  // Evento de clique para fechar o modal
+document.querySelectorAll('.close').forEach(function(closeButton) {
+    closeButton.addEventListener('click', function() {
+        this.parentElement.parentElement.style.display = "none";
     });
 });
 
+
+});

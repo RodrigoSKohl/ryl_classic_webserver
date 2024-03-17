@@ -1,5 +1,6 @@
 # Ignorar diretório node_modules
 node_modules/
 package-lock.json
+niginx/
 # Ignorar arquivo .env (se você estiver usando dotenv)
 .env
