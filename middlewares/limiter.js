@@ -29,7 +29,7 @@ function convertToMilliseconds(timeString) {
 const limiter = rateLimit({
   windowMs: process.env.RATE_LIMIT_WINDOW && convertToMilliseconds(process.env.RATE_LIMIT_WINDOW),
   max: process.env.RATE_LIMIT_MAX,
-  message: 'Muitas requisições a partir deste IP, por favor, tente novamente após algum tempo.',
+  message: 'Lots of requests from this IP, please try again after.',
 });
 
 module.exports = limiter;

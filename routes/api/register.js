@@ -28,34 +28,34 @@ router.post('/api/register', validateHcaptchaMiddleware,  async (req, res) => {
 
     // Validar a senha
     if (senha.length < 6) {
-      errors.push('A senha deve ter pelo menos 6 caracteres.');
+      errors.push('password must be at least 6 characters');
     }
 
     // Confirmar se as senhas são iguais
     if (senha !== confirmarSenha) {
-      errors.push('As senhas não coincidem.');
+      errors.push('passwords not match');
     }
 
     // Validar o formato do username
     if (!validator.isAlphanumeric(username)) {
-      errors.push('Formato inválido para o username.');
+      errors.push('invalid username format');
     }
 
     // Validar o formato do email
     if (!validator.isEmail(email)) {
-      errors.push('Formato inválido para o email.');
+      errors.push('invali email format');
     }
 
     // Verificar se o username já existe no banco de dados
     const existingUser = await checkExistingUser(username, connection, mssql, dbTable);
     if (existingUser) {
-        errors.push('Username já está em uso.');
+        errors.push('username already exists');
     }
 
     // Verificar se o email já existe no banco de dados
     const existingEmail = await checkExistingEmail(email, connection, mssql, dbTable);
     if (existingEmail) {
-      errors.push('Email já está em uso.');
+      errors.push('email already in use');
     }
 
     // Verificar se há erros e retornar o status adequado
@@ -80,21 +80,21 @@ router.post('/api/register', validateHcaptchaMiddleware,  async (req, res) => {
       const createdUser = result.recordset[0];
 
       // Logar no console
-      console.log('Usuário criado com sucesso:');
+      console.log('Usuario criado com sucesso');
       console.log('Username:', createdUser.account);
       console.log('Email:', createdUser.email);
 
         // Resetar a validação do hCaptcha na sessão
       req.session.hcaptchaValidated = false;
 
-      res.status(201).json({ success: 'Usuário registrado com sucesso!', user: createdUser });
+      res.status(201).json({ success: 'successfully registered user', user: createdUser });
     } else {
       console.error('Erro ao criar usuário: Nenhuma linha afetada pela inserção.');
-      res.status(500).json({ error: 'Erro interno do servidor.' });
+      res.status(500).json({ error: 'internal server error' });
     }
   } catch (err) {
     console.error('Erro ao criar usuário:', err.message);
-    res.status(500).json({ error: 'Erro interno do servidor.' });
+    res.status(500).json({ error: 'interval server error' });
   } finally {
     // Sempre libere a conexão, mesmo se ocorrer um erro
     if (connection) {
