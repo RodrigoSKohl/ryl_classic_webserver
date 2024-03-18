@@ -9,5 +9,3 @@
     │   └── styles
     ├── routes
     └── views
-
-    teste
