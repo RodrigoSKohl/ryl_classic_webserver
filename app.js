@@ -27,8 +27,6 @@ const localhost = process.env.LOCAL_HOST;
 const corsMiddleware = require('./middlewares/corsMiddleware');
 const limiter = require('./middlewares/limiter');
 const csrfProtect = require('./middlewares/csrfProtect');
-const checkRegisterAccessMiddleware = require('./middlewares/checkRegisterAccessMiddleware');
-const blockDirectIPAccess = require('./middlewares/blockDirectIPAccess');
 
 //start express
 const app = express();
@@ -40,18 +38,19 @@ app.set('trust proxy', true);
 app.set('view engine', 'ejs');
 
 
-
-
 //ROTAS//
 const index = require('./routes/index');
 const register = require('./routes/register');
 const registerAPI = require('./routes/api/register');
+const confirmEmail = require('./routes/api/confirmEmail');
 //middlewaress globais
-app.use(blockDirectIPAccess, limiter, corsMiddleware)
+app.use(limiter, corsMiddleware)
 //rota index
 app.use('/' ,index);
 //rota de registro
-app.use('/', csrfProtect, register, checkRegisterAccessMiddleware, registerAPI);
+app.use('/', csrfProtect, register, registerAPI);
+//rota de confirmaçao email
+app.use('/', confirmEmail);
 
 // Iniciar o servidor local
 app.listen(localport, localhost, () => {
