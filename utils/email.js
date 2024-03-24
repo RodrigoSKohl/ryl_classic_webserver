@@ -22,7 +22,7 @@ async function sendConfirmationEmail(email, confirmationURL) {
         to: email, // list of receivers
         subject: 'Ryl Classic Email Confirmation', // Subject line
         text: `Please click on the following link to confirm your email: ${confirmationURL}`, // plain text body
-        html: `<p>Please click on the following link to confirm your email: <a href="${confirmationURL}">${confirmationURL}</a></p>` // html body
+        html: `<p><a href="${confirmationURL}">Please click here to confirm your email</a></p>` // html body
       };
   
       // Enviar o e-mail

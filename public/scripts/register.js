@@ -44,7 +44,7 @@ document.getElementById('registroForm').addEventListener('submit', async functio
     })
     .catch(error => {
         console.error('Erro:', error);
-        messageContainer.innerHTML = '<p class="error">Erro interno do servidor.</p>';
+        messageContainer.innerHTML = '<p class="error">Internal Server Error</p>';
         showErrorModal(); // Mostrar o modal de erro
     })
     .finally(() => {
