@@ -1,70 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
-  <%- include('head'); %>
-<body>
-<div class="wrapper register">
-  <%- include('header'); %>
-<main class="main">
-<div class="mainRegister">
-<div class="regBlock" style="padding: 100px 120px !important;">
-<span class="modalTitle">Create Your Account</span>
+<div class="formRegister">
 <form id="registroForm">
 <!-- Campo csrf -->
 <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-<div class="fields">
-<div class="fieldGroup" style="margin: 0 0 10px 0 !important">
-<span>Username</span>
+<span class="title">Username</span>
 <input type="text" id="username" name="username" placeholder="your nickname" required maxlength="12" pattern="[a-zA-Z0-9]+">
-<p class="text-muted">
-<ul>
-<li style="margin: 5px; opacity: 0.5 !important">* This is your nickname. Use only letters and numbers</li>
-</ul>
-</p>
-</div>
-<div class="fieldGroup" style="margin: 0 0 10px 0 !important">
-<span>Email</span>
+<li>This is your nickname. Use only letters and numbers</li>
+<span class="title">Email</span>
 <input type="email" id="email" placeholder="mail@domain.com" name="email" required>
-<p class="text-muted">
-<ul>
-<li style="margin: 5px; opacity: 0.5 !important;">* Enter a valid email address for confirmation email.</li>
-</ul>
-</p>
-</div>
-<div class="fieldGroup" style="margin: 0 0 10px 0 !important">
-<span>Password</span>
+<li>Enter a valid email address for confirmation email.</li>
+<span class="title">Password</span>
 <input type="password" id="senha" placeholder="******" name="senha" required minlength="6">
-<p class="text-muted">
-<ul>
-<li style="margin: 5px; opacity: 0.5 !important">* Must have at least 6 characters.</li>
-</ul>
-</p>
-</div>
-<div class="fieldGroup" style="margin: 0 0 10px 0 !important">
-<span>Confirm password</span>
+<li>Must have at least 6 characters.</li>
+<span class="title">Confirm password</span>
 <input type="password" id="confirmarSenha" name="confirmarSenha" placeholder="******" required minlength="6">
-<p class="text-muted">
-<ul>
-<li style="margin: 5px; opacity: 0.5 !important">*Please confirm the password.</li>
-</ul>
-</p>
-</div>
-</div>
-<div class="fieldGroup" style="margin: 0 0 10px 0 !important">
+<li>Please confirm the password.</li>
 <!-- Campo hCaptcha -->
 <div class="h-captcha" data-sitekey="<%= process.env.HCAPTCHA_SITE_KEY %>" data-theme="dark"></div>
-</div>
-</br>
+<button type="submit" id="submitButton">Sign In Now</button>
+</form>
 <!-- Elemento do spinner de carregamento -->
 <div id="loadingSpinner" style="display: none;">
   <div class="spinner-border text-primary" role="status">
     <span class="visually-hidden">LOADING</span>
   </div>
 </div>
-<button class="big-button-blue" type="submit" id="submitButton">Sign In Now</button>
-</form>
-</div>
-</main>
-</div>
   <%- include('modal'); %>
-  <%- include('footer'); %>
-</html>

@@ -1,29 +1,18 @@
 document.addEventListener('DOMContentLoaded', function() {
-    var topPanel = document.querySelector('.topPanel');
+  const menuToggle = document.getElementById('menu-toggle');
+  const nav = document.getElementById('nav');
 
-    window.addEventListener('scroll', function() {
-        if (window.scrollY > 0) {
-            topPanel.classList.remove('transparent');
-            topPanel.classList.add('black');
-        } else {
-            topPanel.classList.remove('black');
-            topPanel.classList.add('transparent');
-        }
-    });
-});
+  // Event listener para abrir/fechar o menu
+  menuToggle.addEventListener('click', function() {
+      this.classList.toggle('active');
+      nav.classList.toggle('active');
+  });
 
-
-document.addEventListener('DOMContentLoaded', function() {
-    var links = document.querySelectorAll('.nav li a');
-    var currentUrl = window.location.pathname; // Obtém o caminho da URL atual
-
-    links.forEach(function(link) {
-        // Remove a classe ativa de todos os links
-        link.classList.remove('active');
-        
-        // Se o href do link corresponder ao caminho atual ou à raiz "/", adiciona a classe ativa
-        if (link.getAttribute('href') === currentUrl || (link.getAttribute('href') === '/' && currentUrl === '/homepage')) {
-            link.classList.add('active');
-        }
-    });
+  // Event listener para fechar o menu se clicar fora
+  document.body.addEventListener('click', function(event) {
+      if (nav.classList.contains('active') && !event.target.closest('#menu-toggle')) {
+          nav.classList.remove('active');
+          menuToggle.classList.remove('active');
+      }
+  });
 });

@@ -1,0 +1,20 @@
+<div class="confirmEmail">
+<% if (success) { %>
+    <div class="success-message">
+        <p><%= success %></p>
+    </div>
+<% } %>
+
+<% if (error) { %>
+    <div class="error-message">
+        <p><%= error %></p>
+    </div>
+<% } %>
+
+<% if (user) { %>
+    <div class="user-details">
+        <p>Username: <%= user.account %></p>
+        <p>Email: <%= user.email %></p>
+    </div>
+<% } %>
+</div>

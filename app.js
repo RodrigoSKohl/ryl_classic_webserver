@@ -5,6 +5,7 @@ const fs = require('fs');
 const path = require('path');
 const session = require('express-session');
 const crypto = require('crypto');
+const expressLayouts = require('express-ejs-layouts');
 
 // Configurações do SSL
 if (process.env.LOCAL_DEV === 'true') {
@@ -36,13 +37,15 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 app.set('trust proxy', true);
 app.set('view engine', 'ejs');
+app.set('layout', 'layout');
+app.use(expressLayouts);
 
 
 //ROTAS//
 const index = require('./routes/index');
 const register = require('./routes/register');
 const registerAPI = require('./routes/api/register');
-const confirmEmail = require('./routes/api/confirmEmail');
+const confirmEmail = require('./routes/confirmEmail');
 //middlewaress globais
 app.use(limiter, corsMiddleware)
 //rota index

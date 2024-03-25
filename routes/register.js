@@ -4,7 +4,7 @@ const router = express.Router();
 
 router.get('/register',  (req, res) => {
   // Generate a token and send it to the view
-  res.render('register', { csrfToken: req.csrfToken() });
+  res.render('register', {currentPage: 'register', csrfToken: req.csrfToken() });
 });
 
 module.exports = router;

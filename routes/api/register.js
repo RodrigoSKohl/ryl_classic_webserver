@@ -81,7 +81,7 @@
         // Gerar um URL de confirmação de e-mail com o novo token
         const allowedOrigins = process.env.ALLOWED_ORIGINS.split(',');
         const firstOrigin = allowedOrigins[0];
-        const confirmationURL = `${firstOrigin}/api/confirm-email?email=${email}&confirmationToken=${confirmationToken}`;
+        const confirmationURL = `${firstOrigin}/confirm-email?email=${email}&confirmationToken=${confirmationToken}`;
 
         // Enviar o e-mail de confirmação com as novas informações
         await sendConfirmationEmail(email, confirmationURL);
@@ -98,7 +98,7 @@
       // Gerar um URL de confirmação de e-mail com o token
       const allowedOrigins = process.env.ALLOWED_ORIGINS.split(',');
       const firstOrigin = allowedOrigins[0];
-      const confirmationURL = `${firstOrigin}/api/confirm-email?email=${email}&confirmationToken=${confirmationToken}`;
+      const confirmationURL = `${firstOrigin}/confirm-email?email=${email}&confirmationToken=${confirmationToken}`;
 
       // Enviar o e-mail de confirmação
       await sendConfirmationEmail(email, confirmationURL);
