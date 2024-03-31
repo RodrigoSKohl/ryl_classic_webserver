@@ -21,9 +21,8 @@ main {
 
 /* NAVBAR */
   header {
-    background-color: #333;
+
     color: #fff;
-    padding: 3vh;
     user-select: none;
     position: fixed;
     top: 0;
@@ -35,11 +34,8 @@ main {
     display: flex;
     justify-content: space-between;
     align-items: center;
-  }
-  
-  .logo {
-    font-size: large;
-    margin-right: auto;
+    margin: 0 5vh;
+    border-bottom: 2px ridge #cccccc3f;
   }
   
   .nav {
@@ -49,29 +45,48 @@ main {
     padding: 0;
     margin-right: auto;
     z-index: 1;
-  }  
+  }
   
-  .nav li a {
-    color: #fff;
-    text-decoration: none;
+  .nav ul {
+    display: flex;
+    margin: 0;
+  }
+  
+  .nav li {
     background-color: transparent; /* Define o fundo inicial como transparente */
     transition: background-color 0.5s ease; /* Transição suave para a cor de fundo */
-    padding: 3vh;
+    overflow: hidden;
+    text-align: center;
   }
-
-  .nav li a:hover {
+  
+  .nav li a {
+    display: block;
+    color: #fff;
+    text-decoration: none;
+    font-size: large;
+    box-sizing: border-box;
+    padding: 20px;
+    width: 35vh;
+  }
+  
+  .nav li:hover {
     background-color: #2b1313; /* Cor de fundo quando o mouse passa sobre */
   }
   
   .nav li a.active {
-    color: #c75959; /* Por exemplo, muda a cor para vermelho */  }
+    color: #c75959; /* Por exemplo, muda a cor para vermelho */
+  }
 
   .menu-toggle {
     display: none;
     cursor: pointer;
   }
 
-
+  
+  .logo {
+    font-size: large;
+    margin-right: auto;
+  }
 
   .discord-logo {
     width: 5vh !important; /* Defina a largura desejada */
