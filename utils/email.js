@@ -18,7 +18,7 @@ async function sendConfirmationEmail(email, confirmationURL) {
   
       // Conteúdo do e-mail
       const mailOptions = {
-        from: process.env.EMAIL_USER, // sender address
+        from: 'Ryl Classic <' + process.env.EMAIL_USER + '>', // sender address
         to: email, // list of receivers
         subject: 'Ryl Classic Email Confirmation', // Subject line
         text: `Please click on the following link to confirm your email: ${confirmationURL}`, // plain text body
