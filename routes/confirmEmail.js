@@ -39,15 +39,18 @@ router.get('/confirm-email', async (req, res) => {
     response.error = 'Missing parameters.';
   } else {
     try {
-      // Verificar se os dados do usuário estão armazenados no cache
+      // Obter os dados do usuário do cache
       const userData = cacheStorage.get(email);
+
+      // Remover os dados do usuário do cache
+      cacheStorage.del(email);
 
       if (!userData) {
         response.error = 'User data not found or expired.';
       } else {
         const { username, senha, confirmationToken: storedConfirmationToken } = userData;
 
-        // Verificar se o token de confirmação enviado é o mesmo que foi gerado
+        // Verificar se o token e email de confirmação enviado é o mesmo que foi gerado
         if (confirmationToken !== storedConfirmationToken) {
           response.error = 'Invalid confirmation token.';
         } else {
@@ -74,9 +77,6 @@ router.get('/confirm-email', async (req, res) => {
                 account: result.recordset[0].account,
                 email: result.recordset[0].email
               };
-
-              // Remover os dados do usuário do cache após o registro
-              cacheStorage.del(email);
             } else {
               console.error('Error creating user: No rows affected by insertion.');
               response.error = 'Internal server error';
