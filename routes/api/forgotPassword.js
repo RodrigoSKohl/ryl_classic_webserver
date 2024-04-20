@@ -84,7 +84,7 @@ router.post('/api/forgot-password', validateHcaptchaMiddleware, async (req, res)
     const allowedOrigins = process.env.ALLOWED_ORIGINS.split(',');
     const firstOrigin = allowedOrigins[0];
     const confirmationURL = `https://${firstOrigin}/change-password?email=${email}&confirmationToken=${confirmationToken}`;
-    const subject = `Ryl Classic Email Confirmation`; // Subject line
+    const subject = `Ryl Classic Account Recovery`; // Subject line
     const textBody = `Please click on the following link to recovery your password: ${confirmationURL}`;
     const htmlBody = `<p><a href="${confirmationURL}">Please click here to recovery your password</a></p>`;
 
