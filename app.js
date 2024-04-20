@@ -52,6 +52,8 @@ const registerAPI = require('./routes/api/register');
 const confirmEmail = require('./routes/confirmEmail');
 const forgotPassword = require('./routes/forgotPassword');
 const forgotPasswordAPI = require('./routes/api/forgotPassword');
+const changePassword = require('./routes/changePassword');
+const changePasswordAPI = require('./routes/api/changePassword');
 //middlewaress globais
 app.use(limiter, corsMiddleware)
 //rota index
@@ -62,6 +64,8 @@ app.use('/', csrfProtect, register, registerAPI);
 app.use('/', confirmEmail);
 //rota de esqueci minha senha
 app.use('/',csrfProtect, forgotPassword, forgotPasswordAPI);
+//rota de mudar senha
+app.use('/',csrfProtect, changePassword, changePasswordAPI);
 // Iniciar o servidor local
 app.listen(localport, localhost, () => {
   console.log(`Servidor rodando localmente em ${localhost}:${localport}`);

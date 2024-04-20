@@ -89,7 +89,7 @@
         // Enviar o e-mail de confirmação com as novas informações
         await sendConfirmationEmail(email, subject, textBody, htmlBody);
 
-        return res.status(201).json({ success: 'Confirmation email resent. Wait 10 minutes and verify your email to complete registration.' });
+        return res.status(201).json({ success: 'Confirmation email resent.' });
       }
 
       // Gerar um token de confirmação de e-mail único
@@ -109,7 +109,7 @@
       // Enviar o e-mail de confirmação
       await sendConfirmationEmail(email, subject, textBody, htmlBody);
 
-      return res.status(201).json({ success: 'Confirmation email sent. Wait 10 minutes and verify your email to complete registration.' });
+      return res.status(201).json({ success: 'Confirmation email sent.' });
     } catch (err) {
       console.error('Error creating user:', err.message);
       res.status(500).json({ error: 'internal server error' });

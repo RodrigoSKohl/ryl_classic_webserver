@@ -49,6 +49,19 @@ document.addEventListener('DOMContentLoaded', function() {
             if (loadingSpinner) {
                 loadingSpinner.style.display = 'inline-block';
             }
+
+                   // Obter o email e o confirmationToken da URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const email = urlParams.get('email');
+        const confirmationToken = urlParams.get('confirmationToken');
+
+        // Verificar se email e confirmationToken existem antes de adicioná-los ao formData
+        if (email && confirmationToken) {
+            // Adicionar email e confirmationToken aos dados do formulário
+            formData.append('email', email);
+            formData.append('confirmationToken', confirmationToken);
+        }
+            
             var formID = registroForm.id;
             var apiRoute = `/api/${formID}`;
 

@@ -71,7 +71,7 @@ router.post('/api/forgot-password', validateHcaptchaMiddleware, async (req, res)
       // Enviar o e-mail de confirmação
       await sendConfirmationEmail(email, subject, textBody, htmlBody);
 
-      return res.status(201).json({ success: 'Recovery email resent. Wait 10 minutes and verify your email to complete recovery account.' });
+      return res.status(201).json({ success: 'Recovery email resent.' });
     }
 
     // Gerar um token de confirmação de e-mail único
@@ -91,7 +91,7 @@ router.post('/api/forgot-password', validateHcaptchaMiddleware, async (req, res)
     // Enviar o e-mail de confirmação
     await sendConfirmationEmail(email, subject, textBody, htmlBody);
 
-    return res.status(201).json({ success: 'Recovery email sent. Wait 10 minutes and verify your email to complete recovery account.' });
+    return res.status(201).json({ success: 'Recovery email sent.' });
   } catch (err) {
     console.error('Error recovery account:', err.message);
     res.status(500).json({ error: 'internal server error' });
