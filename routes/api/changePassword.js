@@ -68,7 +68,7 @@ router.post('/api/change-password', validateHcaptchaMiddleware, async (req, res)
     // Remover o email do cache
     cacheStorage.del(email);
 
-    res.status(200).json({ success: `<strong>${accountName}</strong> password changed successfully`});
+    res.status(200).json({ success: `<strong>${accountName}</strong> password changed successfully`, redirect: '/' });
 
   } catch (err) {
     console.error('Error changing password:', err.message);

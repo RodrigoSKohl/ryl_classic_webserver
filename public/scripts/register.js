@@ -5,6 +5,8 @@ document.addEventListener('DOMContentLoaded', function() {
         if (successModal && backgroundModal) {
             successModal.style.display = "block";
             backgroundModal.style.display = "block";
+            // Definir um atributo para indicar sucesso no modal
+            successModal.setAttribute('data-success', 'true');
         }
     }
     
@@ -15,6 +17,8 @@ document.addEventListener('DOMContentLoaded', function() {
         if (errorModal && backgroundModal) {
             errorModal.style.display = "block";
             backgroundModal.style.display = "block";
+            // Remover o atributo de sucesso no modal de erro
+            errorModal.removeAttribute('data-success');
         }
     }
     
@@ -28,6 +32,16 @@ document.addEventListener('DOMContentLoaded', function() {
             if (parentModal && modalBackground) {
                 parentModal.style.display = "none";
                 modalBackground.style.display = "none";
+                
+                // Verificar se o modal está marcado como sucesso
+                const dataSuccess = parentModal.getAttribute('data-success');
+                if (dataSuccess === 'true') {
+                    // Se for sucesso, verificar se há redirecionamento
+                    const dataRedirect = parentModal.getAttribute('data-redirect');
+                    if (dataRedirect) {
+                        window.location.href = dataRedirect;
+                    }
+                }
             }
         });
     });
@@ -50,17 +64,17 @@ document.addEventListener('DOMContentLoaded', function() {
                 loadingSpinner.style.display = 'inline-block';
             }
 
-                   // Obter o email e o confirmationToken da URL
-        const urlParams = new URLSearchParams(window.location.search);
-        const email = urlParams.get('email');
-        const confirmationToken = urlParams.get('confirmationToken');
+            // Obter o email e o confirmationToken da URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const email = urlParams.get('email');
+            const confirmationToken = urlParams.get('confirmationToken');
 
-        // Verificar se email e confirmationToken existem antes de adicioná-los ao formData
-        if (email && confirmationToken) {
-            // Adicionar email e confirmationToken aos dados do formulário
-            formData.append('email', email);
-            formData.append('confirmationToken', confirmationToken);
-        }
+            // Verificar se email e confirmationToken existem antes de adicioná-los ao formData
+            if (email && confirmationToken) {
+                // Adicionar email e confirmationToken aos dados do formulário
+                formData.append('email', email);
+                formData.append('confirmationToken', confirmationToken);
+            }
             
             var formID = registroForm.id;
             var apiRoute = `/api/${formID}`;
@@ -78,7 +92,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (loadingSpinner) {
                     loadingSpinner.style.display = 'none';
                 }
-
+            
                 if (data.success) {
                     if (registroForm) {
                         registroForm.reset();
@@ -88,6 +102,12 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
                     window.hcaptcha.reset(); 
                     showSuccessModal(); // Mostrar o modal de sucesso
+                    // Definir o redirecionamento no modal de sucesso, se houver
+                    const redirectURL = data.redirect;
+                    if (redirectURL) {
+                        const successModal = document.getElementById("Modal");
+                        successModal.setAttribute('data-redirect', redirectURL);
+                    }
                 } else if (data.error || (data.errors && data.errors.length > 0)) {
                     if (messageContainer) {
                         messageContainer.innerHTML = '';
@@ -120,4 +140,3 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
-
