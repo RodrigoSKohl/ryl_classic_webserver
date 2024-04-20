@@ -1,49 +1,0 @@
-2024/03/10 01:20:16 [emerg] 14860#18720: cannot load certificate key "C:\Usersodri\√Årea de Trabalho\scrap_PoE\certificate\server-key.pem": BIO_new_file() failed (SSL: error:8000007B:system library::Unknown error:calling fopen(C:\Usersodri\√Årea de Trabalho\scrap_PoE\certificate\server-key.pem, r) error:10080002:BIO routines::system lib)
-2024/03/10 01:24:28 [emerg] 8248#18648: cannot load certificate key "C:\Usersodri\√Årea de Trabalho\scrap_PoE\certificate\server-key.pem": BIO_new_file() failed (SSL: error:8000007B:system library::Unknown error:calling fopen(C:\Usersodri\√Årea de Trabalho\scrap_PoE\certificate\server-key.pem, r) error:10080002:BIO routines::system lib)
-2024/03/10 23:24:37 [emerg] 9300#9284: cannot load certificate "C:\Users\rodri\√Årea de Trabalho\scrap_PoE\certificate\server-cert.pem": BIO_new_file() failed (SSL: error:80000003:system library::No such process:calling fopen(C:\Users\rodri\√Årea de Trabalho\scrap_PoE\certificate\server-cert.pem, r) error:10000080:BIO routines::no such file)
-2024/03/10 23:55:28 [error] 12616#12944: *9 connect() failed (10061: Nenhuma conex„o pÙde ser feita porque a m·quina de destino as recusou ativamente) while connecting to upstream, client: 127.0.0.1, server: localhost, request: "GET / HTTP/1.1", upstream: "https://192.168.94.110:3001/", host: "localhost"
-2024/03/10 23:55:31 [error] 12616#12944: *9 connect() failed (10061: Nenhuma conex„o pÙde ser feita porque a m·quina de destino as recusou ativamente) while connecting to upstream, client: 127.0.0.1, server: localhost, request: "GET /favicon.ico HTTP/1.1", upstream: "https://192.168.94.110:3001/favicon.ico", host: "localhost", referrer: "https://localhost/"
-2024/03/10 23:56:34 [notice] 1404#8252: signal process started
-2024/03/11 00:01:42 [emerg] 13844#14668: "server" directive is not allowed here in C:\site\nginx/conf/nginx.conf:1
-2024/03/11 00:01:50 [emerg] 2060#3140: "server" directive is not allowed here in C:\site\nginx/conf/nginx.conf:1
-2024/03/11 00:03:26 [error] 6556#13292: *9 connect() failed (10061: Nenhuma conex„o pÙde ser feita porque a m·quina de destino as recusou ativamente) while connecting to upstream, client: 127.0.0.1, server: localhost, request: "GET /app HTTP/1.1", upstream: "http://127.0.0.1:3000/app", host: "localhost"
-2024/03/11 00:06:45 [notice] 13244#8584: signal process started
-2024/03/11 00:10:27 [notice] 4984#1400: signal process started
-2024/03/24 01:58:45 [emerg] 4840#20200: CreateDirectory() "C:\site\scrap_PoE\nginx/temp/client_body_temp" failed (3: O sistema n„o pode encontrar o caminho especificado)
-2024/03/24 01:58:59 [emerg] 3404#16792: CreateDirectory() "C:\site\scrap_PoE\nginx/temp/client_body_temp" failed (3: O sistema n„o pode encontrar o caminho especificado)
-2024/03/24 01:59:55 [emerg] 1408#18028: CreateDirectory() "C:\site\scrap_PoE\nginx/temp/client_body_temp" failed (3: O sistema n„o pode encontrar o caminho especificado)
-2024/03/24 02:01:30 [error] 19084#18556: *9 connect() failed (10061: Nenhuma conex„o pÙde ser feita porque a m·quina de destino as recusou ativamente) while connecting to upstream, client: 127.0.0.1, server: localhost, request: "GET / HTTP/1.1", upstream: "https://192.168.94.110:3001/", host: "localhost"
-2024/03/24 02:01:32 [error] 19084#18556: *9 connect() failed (10061: Nenhuma conex„o pÙde ser feita porque a m·quina de destino as recusou ativamente) while connecting to upstream, client: 127.0.0.1, server: localhost, request: "GET /favicon.ico HTTP/1.1", upstream: "https://192.168.94.110:3001/favicon.ico", host: "localhost", referrer: "https://localhost/"
-2024/03/24 02:11:17 [error] 19084#18556: *176 connect() failed (10061: Nenhuma conex„o pÙde ser feita porque a m·quina de destino as recusou ativamente) while connecting to upstream, client: 127.0.0.1, server: localhost, request: "GET /app HTTP/1.1", upstream: "http://127.0.0.1:3000/app", host: "localhost"
-2024/03/24 02:17:13 [notice] 18648#17764: signal process started
-2024/03/24 02:17:17 [notice] 18124#2916: signal process started
-2024/03/24 02:17:17 [error] 18124#2916: CreateFile() "C:\site\scrap_PoE\nginx/logs/nginx.pid" failed (2: O sistema n„o pode encontrar o arquivo especificado)
-2024/03/24 02:17:48 [notice] 20364#13588: signal process started
-2024/03/24 02:17:48 [error] 20364#13588: CreateFile() "C:\site\scrap_PoE\nginx/logs/nginx.pid" failed (2: O sistema n„o pode encontrar o arquivo especificado)
-2024/03/24 02:18:17 [notice] 7672#10876: signal process started
-2024/03/24 02:20:31 [notice] 12448#3304: signal process started
-2024/03/24 02:24:14 [notice] 1400#10812: signal process started
-2024/03/24 02:24:22 [notice] 16456#19676: signal process started
-2024/03/24 02:26:53 [emerg] 16508#7576: invalid condition "$http_host" in C:\site\scrap_PoE\nginx/conf/nginx.conf:11
-2024/03/24 02:27:09 [emerg] 15608#16200: invalid condition "$http_host" in C:\site\scrap_PoE\nginx/conf/nginx.conf:11
-2024/03/24 02:27:45 [notice] 8132#16364: signal process started
-2024/03/24 02:28:07 [emerg] 17428#18972: invalid condition "$http_host" in C:\site\scrap_PoE\nginx/conf/nginx.conf:11
-2024/03/24 02:35:10 [notice] 15840#16452: signal process started
-2024/03/24 02:49:31 [notice] 15780#14516: signal process started
-2024/03/24 02:55:01 [notice] 12284#19460: signal process started
-2024/03/24 02:58:31 [notice] 9672#20224: signal process started
-2024/03/24 02:58:37 [notice] 14224#8268: signal process started
-2024/03/24 02:58:37 [error] 14224#8268: CreateFile() "C:\site\scrap_PoE\nginx/logs/nginx.pid" failed (2: O sistema n„o pode encontrar o arquivo especificado)
-2024/03/24 03:03:16 [notice] 17740#16680: signal process started
-2024/03/25 05:39:24 [emerg] 13740#11960: CreateFile() "C:/site/certificate/ssl_password.txt" failed (3: O sistema n„o pode encontrar o caminho especificado) in C:\site\scrap_PoE\nginx/conf/nginx.conf:20
-2024/03/25 05:40:43 [emerg] 22036#24332: CreateFile() "C:/site/certificate/ssl_password.txt" failed (3: O sistema n„o pode encontrar o caminho especificado) in C:\site\scrap_PoE\nginx/conf/nginx.conf:20
-2024/03/25 05:42:02 [emerg] 2136#22848: CreateFile() "C:/site/certificate/ssl_password.txt" failed (3: O sistema n„o pode encontrar o caminho especificado) in C:\site\scrap_PoE\nginx/conf/nginx.conf:20
-2024/03/25 05:42:18 [emerg] 21140#23584: CreateFile() "C:/site/certificate/ssl_password.txt" failed (3: O sistema n„o pode encontrar o caminho especificado) in C:\site\scrap_PoE\nginx/conf/nginx.conf:20
-2024/03/25 05:42:23 [emerg] 24708#24008: cannot load certificate "C:/site/certificate/server-cert.pem": BIO_new_file() failed (SSL: error:80000003:system library::No such process:calling fopen(C:/site/certificate/server-cert.pem, r) error:10000080:BIO routines::no such file)
-2024/03/25 05:43:13 [emerg] 264#8740: cannot load certificate "C:/site/certificate/server-cert.pem": BIO_new_file() failed (SSL: error:80000003:system library::No such process:calling fopen(C:/site/certificate/server-cert.pem, r) error:10000080:BIO routines::no such file)
-2024/03/25 05:43:30 [emerg] 23804#11888: cannot load certificate "C:/site/certificate/server-cert.pem": BIO_new_file() failed (SSL: error:80000003:system library::No such process:calling fopen(C:/site/certificate/server-cert.pem, r) error:10000080:BIO routines::no such file)
-2024/03/25 05:43:52 [emerg] 8460#23812: cannot load certificate "C:/site/certificate/server-cert.pem": BIO_new_file() failed (SSL: error:80000003:system library::No such process:calling fopen(C:/site/certificate/server-cert.pem, r) error:10000080:BIO routines::no such file)
-2024/03/25 05:44:44 [emerg] 5904#24456: CreateFile() "C:\site\scrap_PoE\nginx/conf/../../site/certificate/ssl_password.txt" failed (3: O sistema n„o pode encontrar o caminho especificado) in C:\site\scrap_PoE\nginx/conf/nginx.conf:20
-2024/03/25 05:45:15 [emerg] 3616#21096: CreateFile() "C:\site\scrap_PoE\nginx/conf/../site/certificate/ssl_password.txt" failed (3: O sistema n„o pode encontrar o caminho especificado) in C:\site\scrap_PoE\nginx/conf/nginx.conf:20
-2024/03/25 05:49:12 [emerg] 25240#12560: CreateFile() "C:/site/certificate/ssl_password.txt" failed (3: O sistema n„o pode encontrar o caminho especificado) in C:\site\scrap_PoE\nginx/conf/nginx.conf:20
-2024/03/25 05:49:50 [emerg] 25020#9232: cannot load certificate "C:/certificate/scrap_PoE/server-cert.pem": BIO_new_file() failed (SSL: error:80000003:system library::No such process:calling fopen(C:/certificate/scrap_PoE/server-cert.pem, r) error:10000080:BIO routines::no such file)
