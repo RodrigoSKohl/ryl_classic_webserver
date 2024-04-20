@@ -81,10 +81,13 @@
         // Gerar um URL de confirmação de e-mail com o novo token
         const allowedOrigins = process.env.ALLOWED_ORIGINS.split(',');
         const firstOrigin = allowedOrigins[0];
-        const confirmationURL = `${firstOrigin}/confirm-email?email=${email}&confirmationToken=${confirmationToken}`;
+        const confirmationURL = `https://${firstOrigin}/confirm-email?email=${email}&confirmationToken=${confirmationToken}`;
+        const subject = `Ryl Classic Email Confirmation`; // Subject line
+        const textBody = `Please click on the following link to confirm your email: ${confirmationURL}`;
+        const htmlBody = `<p><a href="${confirmationURL}">Please click here to confirm your email</a></p>`;
 
         // Enviar o e-mail de confirmação com as novas informações
-        await sendConfirmationEmail(email, confirmationURL);
+        await sendConfirmationEmail(email, subject, textBody, htmlBody);
 
         return res.status(201).json({ success: 'Confirmation email resent. Wait 10 minutes and verify your email to complete registration.' });
       }
@@ -98,10 +101,13 @@
       // Gerar um URL de confirmação de e-mail com o token
       const allowedOrigins = process.env.ALLOWED_ORIGINS.split(',');
       const firstOrigin = allowedOrigins[0];
-      const confirmationURL = `${firstOrigin}/confirm-email?email=${email}&confirmationToken=${confirmationToken}`;
+      const confirmationURL = `https://${firstOrigin}/confirm-email?email=${email}&confirmationToken=${confirmationToken}`;
+      const subject = `Ryl Classic Email Confirmation`; // Subject line
+      const textBody = `Please click on the following link to confirm your email: ${confirmationURL}`;
+      const htmlBody = `<p><a href="${confirmationURL}">Please click here to confirm your email</a></p>`;
 
       // Enviar o e-mail de confirmação
-      await sendConfirmationEmail(email, confirmationURL);
+      await sendConfirmationEmail(email, subject, textBody, htmlBody);
 
       return res.status(201).json({ success: 'Confirmation email sent. Wait 10 minutes and verify your email to complete registration.' });
     } catch (err) {

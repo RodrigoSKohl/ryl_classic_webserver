@@ -1,6 +1,6 @@
 // utils/email.js
 
-async function sendConfirmationEmail(email, confirmationURL) {
+async function sendConfirmationEmail(email, subject, textBody, htmlBody) {
     try {
       //  biblioteca de e-mail como nodemailer
       const nodemailer = require('nodemailer');
@@ -20,11 +20,11 @@ async function sendConfirmationEmail(email, confirmationURL) {
       const mailOptions = {
         from: 'Ryl Classic <' + process.env.EMAIL_USER + '>', // sender address
         to: email, // list of receivers
-        subject: 'Ryl Classic Email Confirmation', // Subject line
-        text: `Please click on the following link to confirm your email: ${confirmationURL}`, // plain text body
-        html: `<p><a href="${confirmationURL}">Please click here to confirm your email</a></p>` // html body
+        subject: subject, // Subject line
+        text: textBody, // plain text body
+        html: htmlBody // html body
       };
-  
+      
       // Enviar o e-mail
       const info = await transporter.sendMail(mailOptions);
   

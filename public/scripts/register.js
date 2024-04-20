@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Event listener para o formulário de registro
-    var registroForm = document.getElementById('registroForm');
+    var registroForm = document.querySelector('.registroForm');
     if (registroForm) {
         registroForm.addEventListener('submit', async function(event) {
             event.preventDefault();
@@ -49,8 +49,10 @@ document.addEventListener('DOMContentLoaded', function() {
             if (loadingSpinner) {
                 loadingSpinner.style.display = 'inline-block';
             }
+            var formID = registroForm.id;
+            var apiRoute = `/api/${formID}`;
 
-            await fetch('/api/register', {
+            await fetch(apiRoute, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

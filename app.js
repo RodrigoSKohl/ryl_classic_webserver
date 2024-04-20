@@ -6,6 +6,7 @@ const path = require('path');
 const session = require('express-session');
 const crypto = require('crypto');
 const expressLayouts = require('express-ejs-layouts');
+const  { downloadURL, discordInvite } = require('./utils/constants');
 
 // Configurações do SSL
 if (process.env.LOCAL_DEV === 'true') {
@@ -36,6 +37,9 @@ app.use(session({ secret: sessionkey, resave: false, saveUninitialized: true }))
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 app.set('trust proxy', true);
+// Definindo a variável global
+app.locals.downloadURL = downloadURL;
+app.locals.discordInvite = discordInvite;
 app.set('view engine', 'ejs');
 app.set('layout', 'layout');
 app.use(expressLayouts);
@@ -46,6 +50,8 @@ const index = require('./routes/index');
 const register = require('./routes/register');
 const registerAPI = require('./routes/api/register');
 const confirmEmail = require('./routes/confirmEmail');
+const forgotPassword = require('./routes/forgotPassword');
+const forgotPasswordAPI = require('./routes/api/forgotPassword');
 //middlewaress globais
 app.use(limiter, corsMiddleware)
 //rota index
@@ -54,7 +60,8 @@ app.use('/' ,index);
 app.use('/', csrfProtect, register, registerAPI);
 //rota de confirmaçao email
 app.use('/', confirmEmail);
-
+//rota de esqueci minha senha
+app.use('/',csrfProtect, forgotPassword, forgotPasswordAPI);
 // Iniciar o servidor local
 app.listen(localport, localhost, () => {
   console.log(`Servidor rodando localmente em ${localhost}:${localport}`);

@@ -1,5 +1,6 @@
 <div class="formRegister">
-<form id="registroForm">
+  <h1>NEW ACCOUNT</h1>
+<form class="registroForm" id="register">
 <!-- Campo csrf -->
 <input type="hidden" name="_csrf" value="<%= csrfToken %>">
 <span class="title">Username</span>
@@ -24,4 +25,6 @@
     <span class="visually-hidden">LOADING</span>
   </div>
 </div>
-  <%- include('modal'); %>
+<%- include('modal'); %>
+</div>
+<script src="/scripts/register.js" defer></script>
