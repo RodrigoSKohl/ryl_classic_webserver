@@ -51,6 +51,7 @@ main {
   .nav ul {
     display: flex;
     margin: 0;
+    padding-inline-start: 0;
   }
   
   .nav li {
