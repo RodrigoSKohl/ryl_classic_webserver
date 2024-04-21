@@ -1,5 +1,7 @@
-# Ignorar diretório node_modules
+# Ignorar diretório
 node_modules/
 package-lock.json
+certificate/win-acme/
+nginx/logs/
 # Ignorar arquivo .env (se você estiver usando dotenv)
 .env
