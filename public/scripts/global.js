@@ -34,22 +34,36 @@ window.addEventListener('scroll', function() {
     header.style.transition = "background-color 0.3s ease"; // Adiciona uma transição suave
   });
 
-
+//MOSTRAR FOOTER SOMENTE QUANDO O USUÁRIO CHEGAR AO FINAL DA PÁGINA
   document.addEventListener('DOMContentLoaded', function() {
     var footer = document.querySelector('footer');
+    var showFooterThreshold = 0.95; // Exibir o footer quando o usuário rolar até 95% do final da página
 
     function toggleFooter() {
-        // Se a posição do scroll estiver no final da página, exiba o footer
-        if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight) {
+        // Calcular a posição em que o usuário está em relação ao final da página
+        var positionRelativeToBottom = (window.innerHeight + window.scrollY) / document.documentElement.scrollHeight;
+
+        // Se a posição for maior ou igual ao limite definido, exibir o footer
+        if (positionRelativeToBottom >= showFooterThreshold) {
             footer.style.display = 'block'; // Exibe o footer
+            localStorage.setItem('footerVisible', 'true'); // Armazena o estado do footer como visível
         } else {
             footer.style.display = 'none'; // Oculta o footer
+            localStorage.setItem('footerVisible', 'false'); // Armazena o estado do footer como oculto
         }
     }
 
-    // Adiciona um listener de evento de rolagem
-    window.addEventListener('scroll', toggleFooter);
+    // Verifica se o footer estava visível antes
+    var footerWasVisible = localStorage.getItem('footerVisible');
+    if (footerWasVisible === 'true') {
+        footer.style.display = 'block'; // Exibe o footer
+    } else {
+        footer.style.display = 'none'; // Oculta o footer
+    }
 
     // Chama a função para verificar o estado do footer ao carregar a página
     toggleFooter();
+
+    // Adiciona um listener de evento de rolagem
+    window.addEventListener('scroll', toggleFooter);
 });
