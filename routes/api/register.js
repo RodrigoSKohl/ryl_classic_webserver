@@ -10,17 +10,22 @@
   const validator = require('validator');
   const cacheStorage = require('../../utils/cache.js'); // Importe a instância de cache
   const dbTable = process.env.DB_TABLE; // Nome da tabela a partir da variável de ambiente
+  const crypto = require('crypto');
 
   // Função para gerar um token de confirmação de e-mail único
   function generateConfirmationToken() {
     const length = 32; // Comprimento do token
     const chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'; // Caracteres possíveis no token
     let token = '';
-
-    for (let i = 0; i < length; i++) {
-      token += chars.charAt(Math.floor(Math.random() * chars.length)); // Adiciona um caractere aleatório ao token
+  
+    // Gera bytes criptograficamente seguros
+    const bytes = crypto.randomBytes(length);
+  
+    for (let i = 0; i < bytes.length; i++) {
+      const index = bytes[i] % chars.length;
+      token += chars.charAt(index);
     }
-
+  
     return token;
   }
 
