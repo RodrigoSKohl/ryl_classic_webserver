@@ -12,3 +12,6 @@
     ├── views
     └── utils
 
+Install Sql Express
+start nginx
+run npm start
