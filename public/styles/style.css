@@ -6,34 +6,11 @@ html {
 
 }
 
-/* Estiliza a barra de rolagem vertical */
+/* Oculta a barra de rolagem vertical */
 body::-webkit-scrollbar {
-  width: 5px; /* Largura da barra de rolagem vertical */
-  position: sticky; /* Mantém a barra de rolagem visível mesmo quando não está rolando */
-  background-color:darkred;
+  width: 0; /* Torna a largura da barra de rolagem zero */
+  background: transparent; /* Define o fundo da barra de rolagem como transparente */
 }
-
-/* Estiliza o botão de rolagem para cima e para baixo */
-body::-webkit-scrollbar-button {
-  display: none; /* Oculta os botões de rolagem */
-}
-
-/* Estiliza a área de rolagem */
-body::-webkit-scrollbar-track {
-  background-color: transparent; /* Cor de fundo da área de rolagem */
-}
-
-/* Estiliza o indicador da posição atual de rolagem */
-body::-webkit-scrollbar-thumb {
-  background-color: rgba(0, 0, 0, 0.8 ); /* Cor do indicador da posição atual de rolagem */
-  border-radius: 10px; /* Raio da borda do indicador */
-}
-
-/* Estiliza a borda da barra de rolagem */
-body::-webkit-scrollbar-track-piece:end {
-  margin-bottom: -20px; /* Compensa o espaç o ocupado pela barra de rolagem */
-}
-
 
 body {
     font-family: Arial, sans-serif;
@@ -42,8 +19,6 @@ body {
     background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,1)), url('/images/background.jpg') no-repeat center center;
     background-attachment: fixed;
     background-size: cover;
-    overflow-y: auto;
-    overflow-x: hidden;
   }
 
  main {
