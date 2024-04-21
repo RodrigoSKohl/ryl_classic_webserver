@@ -97,7 +97,7 @@ body {
     text-decoration: none;
     font-size: large;
     box-sizing: border-box;
-    padding: 4vh;
+    padding: 5vh;
     width: 45vh;
   }
   
@@ -120,7 +120,7 @@ body {
   }
 
   .discord-logo {
-    width: 5vh !important; /* Defina a largura desejada */
+    width: 8vh !important; /* Defina a largura desejada */
     height: auto !important; /* Deixe a altura auto para manter a proporção original da imagem */
     fill: #ffffff !important; /* Defina a cor de preenchimento desejada */
     transition: transform 0.3s ease; /* Adiciona uma transição suave */
