@@ -11,7 +11,7 @@ const crypto = require('crypto');
 
 // Função para gerar um token de confirmação de e-mail único
 function generateConfirmationToken() {
-  const length = 32; // Comprimento do token
+  const length = 64; // Comprimento do token
   const chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'; // Caracteres possíveis no token
   let token = '';
 
