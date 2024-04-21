@@ -33,3 +33,23 @@ window.addEventListener('scroll', function() {
     }
     header.style.transition = "background-color 0.3s ease"; // Adiciona uma transição suave
   });
+
+
+  document.addEventListener('DOMContentLoaded', function() {
+    var footer = document.querySelector('footer');
+
+    function toggleFooter() {
+        // Se a posição do scroll estiver no final da página, exiba o footer
+        if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight) {
+            footer.style.display = 'block'; // Exibe o footer
+        } else {
+            footer.style.display = 'none'; // Oculta o footer
+        }
+    }
+
+    // Adiciona um listener de evento de rolagem
+    window.addEventListener('scroll', toggleFooter);
+
+    // Chama a função para verificar o estado do footer ao carregar a página
+    toggleFooter();
+});

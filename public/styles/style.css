@@ -1,26 +1,23 @@
 @import url(https://fonts.googleapis.com/css?family=Akronim);
+@import url(firelogo.css);
 
 html {
-  height: 100%;
+
 }
 
 body {
     font-family: Arial, sans-serif;
     color: white;
     margin: 0;
-    padding: 0;
     background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,1)), url('/images/background.jpg') no-repeat center center;
     background-attachment: fixed;
     background-size: cover;
+
   }
 
+ main {
 
-main {
-    text-align: center;
-    margin-bottom: 8vh;
   }
-
-
 
 /* NAVBAR */
   header {
@@ -88,7 +85,6 @@ main {
 
   
   .logo {
-    font-size: large;
     margin-right: auto;
   }
 
@@ -109,15 +105,15 @@ main {
 
 /* FOOTER */
   footer {
-    display: block;
+    display: none;
     background-color: #333;
     color: #744b4b;
     text-align: center;
     font-size: small;
     user-select: none;
-    position: fixed;
-    bottom: 0;
     width: 100%;
+    position: fixed;
+    bottom: 0; 
   }
 /* FOOTER */
 
@@ -132,7 +128,7 @@ main {
           top: 0;
           left: 0;
           width: 100%;
-          height: 100%;
+
           background-color: rgba(0, 0, 0, 0.5); /* Transparência */
           z-index: 2; /* Z-index menor do que o modal */
           backdrop-filter: blur(5px); /* Adiciona um efeito de borrão ao fundo */
@@ -197,8 +193,8 @@ main {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    margin-top: 16vh;
+    margin-top: 10%;
+    margin-bottom: 5%;
   }
 
   .formRegister h1 {
@@ -212,7 +208,6 @@ main {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-bottom: 6vh; 
   }
 
 .formRegister li {
@@ -236,7 +231,7 @@ main {
     text-transform: uppercase;
     width: 100%;
     height: 10vh;
-    margin-top: 5vh;
+    margin-top: 5vh;                  
     user-select: none;
 }
 
@@ -283,112 +278,10 @@ main {
 
 /* INDEX */
 .indexText {
-  height: 100%;
-  display: flex;
-  justify-content: space-around;
-  flex-direction: column;
+
 }
-
-
-
-.fire {
-    margin: 50px auto;
-    width: 80%;
-    max-width: 1000px;
-    height: 600px;
-    background-position: center center;
-    background-size: 1000px 200px;
-    border-radius: 10px;
-    font-family: 'Akronim';
-    overflow: hidden;
-    text-align: center;
-    vertical-align: middle;
-    user-select: none;
-}
-
-.fire:before {
-    content: '';
-    display: inline-block;
-    height: 100%;
-    vertical-align: middle;
-}
-
-.Blazing {
-    display: inline-block;
-    margin: 0;
-    color: rgb(255, 115, 0);
-    font-size: 100px;
-    line-height: 50px;
-    min-width: 50px;
-    outline: none;
-    vertical-align: middle;
-    text-shadow:
-        0 3px 20px red,
-        0 0 20px red,
-        0 0 10px orange,
-        4px -5px 6px yellow,
-        -4px -10px 10px yellow,
-        0 -10px 30px yellow;
-    animation: 2s Blazing infinite alternate linear;
-}
-
-@keyframes Blazing {
-    0% {
-        text-shadow: 0 3px 20px red, 0 0 20px red,
-            0 0 10px orange,
-            0 0 0 yellow,
-            0 0 5px yellow,
-            -2px -5px 5px yellow,
-            4px -10px 10px yellow;
-    }
-    25% {
-        text-shadow: 0 3px 20px red, 0 0 30px red,
-            0 0 20px orange,
-            0 0 5px yellow,
-            -2px -5px 5px yellow,
-            3px -10px 10px yellow,
-            -4px -15px 20px yellow;
-    }
-    50% {
-        text-shadow: 0 3px 20px red, 0 0 20px red,
-            0 -5px 10px orange,
-            -2px -5px 5px yellow,
-            3px -10px 10px yellow,
-            -4px -15px 20px yellow,
-            2px -20px 30px rgba(255, 255, 0, 0.5);
-    }
-    75% {
-        text-shadow: 0 3px 20px red, 0 0 20px red,
-            0 -5px 10px orange,
-            3px -5px 5px yellow,
-            -4px -10px 10px yellow,
-            2px -20px 30px rgba(255, 255, 0, 0.5),
-            0px -25px 40px rgba(255, 255, 0, 0)
-    }
-    100% {
-        text-shadow: 0 3px 20px red, 0 0 20px red,
-            0 0 10px orange,
-            0 0 0 yellow,
-            0 0 5px yellow,
-            -2px -5px 5px yellow,
-            4px -10px 10px yellow;
-    }
-}
-
-/* Media query para ajustar o tamanho do texto em telas menores */
-@media screen and (max-width: 846px) {
-    .Blazing {
-        font-size: 50px; /* Ajusta o tamanho do texto para telas menores */
-    }
-}
-
-@media screen and (max-width: 434px) {
-  .Blazing {
-      font-size: 20px; /* Ajusta o tamanho do texto para telas menores */
-  }
-}
-
 /* INDEX */
+
 
 
 /* CONFIRM EMAIL */
