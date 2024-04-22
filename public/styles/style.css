@@ -2,6 +2,9 @@
 @import url(sparks.css);
 @import url(firelogo.css);
 
+html {
+  height: 100%;
+}
 
 /* Oculta a barra de rolagem vertical */
 body::-webkit-scrollbar {
@@ -18,13 +21,15 @@ body {
     background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,1)), url('/images/background.jpg') no-repeat center center;
     background-attachment: fixed;
     background-size: cover;
+    height: 100%;
   }
 
 
 main {
     text-align: center;
-    height: 100vh;
-    margin-bottom: 4vh;
+    height: 100%;
+    margin-top: 16vh;
+    margin-bottom: 2vh;
   }
 
 
@@ -37,24 +42,18 @@ main {
     position: fixed;
     top: 0;
     width: 100%;
-    z-index: 2;
+    z-index: 1;
   }
   
   .navbar {
     display: flex;
-    justify-content: space-between;
     align-items: center;
     margin: 0 5vh;
     border-bottom: 2px ridge #cccccc3f;
   }
   
   .nav {
-    display: flex;
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
     margin-right: auto;
-    z-index: 1;
   }
   
   .nav ul {
@@ -95,7 +94,6 @@ main {
 
   
   .logo {
-    font-size: large;
     margin-right: auto;
   }
 
@@ -122,7 +120,7 @@ main {
     text-align: center;
     font-size: small;
     user-select: none;
-    position: static;
+    position: relative;
     width: 100%;
     bottom: 0;
   }
@@ -194,8 +192,7 @@ main {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    margin-top: 16vh;
+    height: 100%;
   }
 
   .formRegister h1 {
