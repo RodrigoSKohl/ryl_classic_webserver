@@ -1,10 +1,7 @@
 @import url(https://fonts.googleapis.com/css?family=Akronim);
-@import url(firelogo.css);
 @import url(sparks.css);
+@import url(firelogo.css);
 
-html {
-
-}
 
 /* Oculta a barra de rolagem vertical */
 body::-webkit-scrollbar {
@@ -12,18 +9,25 @@ body::-webkit-scrollbar {
   background: transparent; /* Define o fundo da barra de rolagem como transparente */
 }
 
+
 body {
     font-family: Arial, sans-serif;
     color: white;
     margin: 0;
+    padding: 0;
     background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,1)), url('/images/background.jpg') no-repeat center center;
     background-attachment: fixed;
     background-size: cover;
   }
 
- main {
 
+main {
+    text-align: center;
+    height: 100vh;
+    margin-bottom: 4vh;
   }
+
+
 
 /* NAVBAR */
   header {
@@ -72,8 +76,8 @@ body {
     text-decoration: none;
     font-size: large;
     box-sizing: border-box;
-    padding: 5vh;
-    width: 45vh;
+    padding: 20px;
+    width: 35vh;
   }
   
   .nav li:hover {
@@ -91,11 +95,12 @@ body {
 
   
   .logo {
+    font-size: large;
     margin-right: auto;
   }
 
   .discord-logo {
-    width: 8vh !important; /* Defina a largura desejada */
+    width: 5vh !important; /* Defina a largura desejada */
     height: auto !important; /* Deixe a altura auto para manter a proporção original da imagem */
     fill: #ffffff !important; /* Defina a cor de preenchimento desejada */
     transition: transform 0.3s ease; /* Adiciona uma transição suave */
@@ -111,15 +116,15 @@ body {
 
 /* FOOTER */
   footer {
-    display: none;
+    display: block;
     background-color: #333;
     color: #744b4b;
     text-align: center;
     font-size: small;
     user-select: none;
+    position: static;
     width: 100%;
-    position: fixed;
-    bottom: 0; 
+    bottom: 0;
   }
 /* FOOTER */
 
@@ -134,7 +139,7 @@ body {
           top: 0;
           left: 0;
           width: 100%;
-
+          height: 100%;
           background-color: rgba(0, 0, 0, 0.5); /* Transparência */
           z-index: 2; /* Z-index menor do que o modal */
           backdrop-filter: blur(5px); /* Adiciona um efeito de borrão ao fundo */
@@ -199,8 +204,8 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 10%;
-    margin-bottom: 5%;
+    justify-content: center;
+    margin-top: 16vh;
   }
 
   .formRegister h1 {
@@ -237,7 +242,7 @@ body {
     text-transform: uppercase;
     width: 100%;
     height: 10vh;
-    margin-top: 5vh;                  
+    margin-top: 5vh;
     user-select: none;
 }
 
@@ -283,11 +288,8 @@ body {
 /* REGISTER */
 
 /* INDEX */
-.indexText {
 
-}
 /* INDEX */
-
 
 
 /* CONFIRM EMAIL */
