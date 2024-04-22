@@ -29,7 +29,7 @@ main {
     text-align: center;
     height: 100%;
     margin-top: 16vh;
-    margin-bottom: 2vh;
+    margin-bottom: 6vh;
   }
 
 
@@ -181,8 +181,12 @@ main {
   /* SPINNER LOADING */
   /* Centralizar o spinner de carregamento */
   #loadingSpinner {
+    display: none;
     position: absolute;
-    z-index: 3;
+    top: 25%;
+    right: 25%;
+    left: 25%;
+    z-index: 2; /* Z-index alto para garantir que fique sobreposto */
     user-select: none;
   }
     /* SPINNER LOADING */
