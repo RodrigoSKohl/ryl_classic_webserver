@@ -181,21 +181,11 @@ main {
 
 
   /* SPINNER LOADING */
-.spinner-border {
-    width: 3rem; /* Largura do spinner */
-    height: 3rem; /* Altura do spinner */
-    border-width: 0.25em; /* Largura da borda */
-  }
-  
-  /* Cor do spinner de carregamento */
-  .text-primary {
-    color: #ff0000; /* Cor azul primária */
-  }
-  
   /* Centralizar o spinner de carregamento */
   #loadingSpinner {
-    text-align: center; /* Alinhar o conteúdo ao centro */
-    margin-top: 20px; /* Margem superior */
+    position: absolute;
+    z-index: 3;
+    user-select: none;
   }
     /* SPINNER LOADING */
 

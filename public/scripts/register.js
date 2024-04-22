@@ -52,16 +52,14 @@ document.addEventListener('DOMContentLoaded', function() {
         registroForm.addEventListener('submit', async function(event) {
             event.preventDefault();
             const messageContainer = document.getElementById('message-container');
-            const submitButton = document.getElementById('submitButton');
             const loadingSpinner = document.getElementById('loadingSpinner');
             const formData = new FormData(this);
+            var backgroundModal = document.getElementById("modalBackgroud"); // Defina a variável aqui
 
-            // Ocultar o botão de envio e mostrar o spinner de carregamento
-            if (submitButton) {
-                submitButton.style.display = 'none';
-            }
+            // mostrar o spinner de carregamento
             if (loadingSpinner) {
-                loadingSpinner.style.display = 'inline-block';
+                loadingSpinner.style.display = 'block';
+                backgroundModal.style.display = "block";
             }
 
             // Obter o email e o confirmationToken da URL
@@ -91,6 +89,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Ocultar o spinner de carregamento
                 if (loadingSpinner) {
                     loadingSpinner.style.display = 'none';
+                    backgroundModal.style.display = "none";
                 }
             
                 if (data.success) {
@@ -132,9 +131,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 showErrorModal(); // Mostrar o modal de erro
             })
             .finally(() => {
-                // Mostrar novamente o botão de envio
-                if (submitButton) {
-                    submitButton.style.display = 'inline-block';
+                // mesmo que tenha ocorrido erro ocultar o spinner de carregamento
+                if (loadingSpinner) {
+                    loadingSpinner.style.display = 'none';
                 }
             });
         });
