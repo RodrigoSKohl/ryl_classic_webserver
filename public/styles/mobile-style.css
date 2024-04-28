@@ -6,6 +6,7 @@
   
     .menu-toggle {
       display: block;
+      font-size: 40px;
     }
   
 
@@ -13,9 +14,15 @@
         display: block; /* Altera a exibição da lista para blocos */
         position: fixed; /* Define a posição absoluta para alinhar à esquerda */
         top: 0; /* Alinha o topo da lista ao final do botão de menu */
-        right: 0; /* Alinha a lista à esquerda da tela */
+        left: 0; /* Alinha a lista à esquerda da tela */
         background-color: #333; /* Cor de fundo da lista */
         bottom: 0;
+      }
+
+      .nav.active ul{
+        /* faz com que a lista fique direcionada em forma de coluna*/
+        display: flex;
+        flex-direction: column;
       }
       
       .nav.active li {

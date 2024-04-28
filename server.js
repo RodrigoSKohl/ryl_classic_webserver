@@ -30,5 +30,5 @@ const server = https.createServer(sslOptions, app);
 
 // Inicie o servidor HTTPS
 server.listen(port, host, () => {
-  console.log(`Servidor Express rodando em ${host} na porta ${port}`);
+  console.log(`Servidor Express rodando em https://${host}:${port}`);
 });
