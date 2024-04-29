@@ -75,8 +75,16 @@ main {
     text-decoration: none;
     font-size: large;
     box-sizing: border-box;
-    padding: 20px;
-    width: 35vh;
+    padding: calc(2vh + 0.5vw);
+    width: calc(21vh + 4vw);
+  }
+
+  @media screen and (max-width: 790px) {
+    .nav li a {
+      width: calc(12vh + 1vw); /* Largura fixa menor (150px) + responsiva */
+      font-size: calc(10px + 1vw); /* Tamanho da fonte responsivo */
+      padding: 1vh 1.5vw; /* Preenchimento responsivo */
+    }
   }
   
   .nav li:hover {

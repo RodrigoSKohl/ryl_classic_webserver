@@ -1,6 +1,7 @@
 # Ignorar diretório
 node_modules/
 package-lock.json
-certificate/win-acme/
+certificate/
+nginx/
 # Ignorar arquivo .env
 .env

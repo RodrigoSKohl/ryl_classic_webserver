@@ -64,7 +64,7 @@ router.post('/api/change-password', validateHcaptchaMiddleware, async (req, res)
         accountName = result.recordset[0].account;
       }
     });
-
+   
     // Remover o email do cache
     cacheStorage.del(email);
 
