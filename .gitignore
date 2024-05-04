@@ -4,3 +4,4 @@ package-lock.json
 certificate/win-acme/
 # Ignorar arquivo .env
 .env
+users
