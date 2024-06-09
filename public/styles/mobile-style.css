@@ -1,5 +1,5 @@
 /* RESPONSIVIDADE NAVBAR CELULAR */
-@media (max-width: 560px) {
+@media (max-width: 510px) {
     .nav {
       display: none;
     }
@@ -11,12 +11,20 @@
   
 
     .nav.active {
-        display: block; /* Altera a exibição da lista para blocos */
+        display: flex; /* Altera a exibição da lista para blocos */
         position: fixed; /* Define a posição absoluta para alinhar à esquerda */
         top: 0; /* Alinha o topo da lista ao final do botão de menu */
         left: 0; /* Alinha a lista à esquerda da tela */
         background-color: #333; /* Cor de fundo da lista */
         bottom: 0;
+      }
+    
+      .submenu {
+        position: relative;
+      }
+
+      .nav .active li:hover .submenu li {
+        display: block;
       }
 
       .nav.active ul{
@@ -25,10 +33,6 @@
         flex-direction: column;
       }
       
-      .nav.active li {
-        display: block; /* Altera a exibição de cada item da lista para blocos */
-        margin-bottom: 10px; /* Adiciona um espaçamento inferior entre os itens da lista */
-      }
       
       .nav.active li a {
         display: block; /* Faz com que os links ocupem toda a largura da lista */
@@ -36,6 +40,9 @@
         text-decoration: none; /* Remove a sublinhado dos links */
         background-color: transparent; /* Define o fundo inicial como transparente */
         transition: background-color 0.5s ease; /* Transição suave para a cor de fundo */
+        font-size: small;
+        white-space: nowrap;
+        padding: 2vh 0;
       }
       
         .nav.active li a.active {

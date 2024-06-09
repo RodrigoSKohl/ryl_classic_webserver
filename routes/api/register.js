@@ -10,25 +10,7 @@
   const validator = require('validator');
   const cacheStorage = require('../../utils/cache.js'); // Importe a instância de cache
   const dbTable = process.env.DB_TABLE; // Nome da tabela a partir da variável de ambiente
-  const crypto = require('crypto');
-
-  // Função para gerar um token de confirmação de e-mail único
-  function generateConfirmationToken() {
-    const length = 64; // Comprimento do token
-    const chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'; // Caracteres possíveis no token
-    let token = '';
-  
-    // Gera bytes criptograficamente seguros
-    const bytes = crypto.randomBytes(length);
-  
-    for (let i = 0; i < bytes.length; i++) {
-      const index = bytes[i] % chars.length;
-      token += chars.charAt(index);
-    }
-  
-    return token;
-  }
-
+  const { generateToken } = require('../../utils/token.js');	// Importe a função de geração de token
   const tokenExp = process.env.TOKEN_EXPIRATION || 1200; // Tempo de expiração do token em segundos
 
   router.post('/api/register', validateHcaptchaMiddleware, async (req, res) => {
@@ -78,7 +60,7 @@
       if (cacheStorage.has(email)) {
         // Se o e-mail já estiver no cache, significa que um e-mail de confirmação já foi enviado
         // Gerar um novo token de confirmação de e-mail único
-        const confirmationToken = generateConfirmationToken();
+        const confirmationToken = generateToken();
                 // Remover os dados do usuário antigo do cache
         cacheStorage.del(email);
         //Adicionar novos dados ao cache
@@ -98,7 +80,7 @@
       }
 
       // Gerar um token de confirmação de e-mail único
-      const confirmationToken = generateConfirmationToken();
+      const confirmationToken = generateToken();
 
       // Armazenar os dados do usuário na cache com um tempo de expiração
       cacheStorage.set(email, { username, senha, confirmationToken }, tokenExp); // Multiplicar por 1000 para converter segundos em milissegundos

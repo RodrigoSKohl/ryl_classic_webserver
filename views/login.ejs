@@ -1,0 +1,19 @@
+<div class="form">
+    <h1>LOG IN</h1>
+  <form class="loginForm" id="login">
+  <!-- Campo csrf -->
+  <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+  <span class="title">Username</span>
+  <input type="text" id="username" name="username" placeholder="your nickname" required maxlength="12" pattern="[a-zA-Z0-9]+">
+  <li></li>
+  <span class="title">Password</span>
+  <input type="password" id="senha" placeholder="******" name="senha" required minlength="6">
+  <a href="/forgot-password">Recovery password</a>
+  <!-- Campo hCaptcha -->
+  <div class="h-captcha" data-sitekey="<%= process.env.HCAPTCHA_SITE_KEY %>" data-theme="dark"></div>
+  <button type="submit" id="submitButton">SIGN IN</button>
+  <br>
+  </form>
+  <%- include('modal'); %>
+  </div>
+  <script src="/scripts/login.js" defer></script>

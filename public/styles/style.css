@@ -42,7 +42,7 @@ main {
     position: fixed;
     top: 0;
     width: 100%;
-    z-index: 1;
+    z-index: 2;
   }
   
   .navbar {
@@ -81,9 +81,16 @@ main {
 
   @media screen and (max-width: 790px) {
     .nav li a {
-      width: calc(12vh + 1vw); /* Largura fixa menor (150px) + responsiva */
-      font-size: calc(10px + 1vw); /* Tamanho da fonte responsivo */
+      width: calc(22vh + 1vw); /* Largura fixa menor (150px) + responsiva */
       padding: 1vh 1.5vw; /* Preenchimento responsivo */
+    }
+  }
+
+  @media screen and (max-width: 692px) {
+    .nav li a {
+      width: calc(15vh + 1vw); /* Largura fixa menor (150px) + responsiva */
+      padding: 1.5vh 1vw; /* Preenchimento responsivo */
+      font-size: calc(0.7rem + 0.20vw);
     }
   }
   
@@ -116,6 +123,26 @@ main {
     /* Quando o mouse passa por cima, aplica uma transformação de escala */
 .discord-logo:hover {
   transform: scale(1.2); /* Aumenta a escala em 20% */
+}
+
+
+/* Estilo do submenu */
+.submenu {
+  flex-direction: column;
+  position: absolute;
+  z-index: 1;
+}
+
+.submenu li {
+  display: none;
+  float: none;
+  background-color: #333;
+}
+
+
+/* Exibir o submenu quando o mouse estiver sobre o item do menu principal */
+.nav li:hover .submenu li {
+  display: block;
 }
 
 /* NAVBAR */
@@ -168,7 +195,7 @@ main {
     user-select: none;
   }
   
-  .formRegister .close {
+  .form .close {
     position: absolute;
     top: 0;
     right: 10px;
@@ -177,8 +204,8 @@ main {
     cursor: pointer;
   }
   
-  .formRegister .close:hover,
-  .formRegister .close:focus {
+  .form .close:hover,
+  .form .close:focus {
     color: black;
     text-decoration: none;
   }
@@ -200,27 +227,27 @@ main {
     /* SPINNER LOADING */
 
 
-  .formRegister {
+  .form {
     display: flex;
     flex-direction: column;
     align-items: center;
     height: 100%;
   }
 
-  .formRegister h1 {
+  .form h1 {
     color: grey;
     font-size: xx-large;
     margin-bottom: 6vh;
     user-select: none;
   }
 
-  .formRegister .registroForm {
+  .form form {
     display: flex;
     flex-direction: column;
     align-items: center;
   }
 
-.formRegister li {
+.form li {
     list-style-type: none; /* Remove os marcadores de lista */
     font-size: small;
     color: grey;
@@ -229,7 +256,7 @@ main {
     user-select: none;
 }
 
-.formRegister button {
+.form button {
     cursor: pointer;
     font-size: large;
     background-color: #000000;
@@ -245,13 +272,13 @@ main {
     user-select: none;
 }
 
-.formRegister button:hover {
+.form button:hover {
     box-shadow: 0 0 40px 10px rgba(255, 42, 42, .4); /* Aumenta o deslocamento da sombra quando o mouse está sobre o botão */
 }
   
 
 
-.formRegister .title {
+.form .title {
     color: #696868;
     font-size: medium;
     z-index: 1;
@@ -262,7 +289,7 @@ main {
 }
 
 
-.formRegister input, textarea {
+.form input, textarea {
     background: #040609;
     border: 1px solid #36383a;
     color: #fff;
@@ -276,14 +303,29 @@ main {
     padding-inline: 5px;
 }
 
-.formRegister input:hover {
+.form input:hover {
   box-shadow: 0 0 40px 10px rgb(255, 42, 42, .4) /* Aumenta o deslocamento da sombra quando o mouse está sobre o botão */
 }
 
-.formRegister input:focus {
+.form input:focus {
   outline: none; /* Remove a borda padrão do navegador */
   border: 1px solid rgba(255, 255, 255); /* Define a cor da borda ao focar */
 }
+
+.form a {
+    color: #9b5e5e;
+    text-decoration: none;
+    font-size: small;
+    user-select: none;
+    margin: 5px 0 20px;
+}
+
+.form a:hover {
+    color: #5a3030;
+    text-decoration: underline;
+}
+
+
 /* REGISTER */
 
 /* INDEX */
@@ -297,7 +339,7 @@ main {
   display: flex;
   justify-content: center;
   flex-direction: column;
-  height: 100%;
+  height: 50%;
   font-size: large;
   }
 /* CONFIRM EMAIL */
@@ -308,7 +350,7 @@ main {
   display: flex;
   justify-content: center;
   flex-direction: column;
-  height: 100%;
+  height: 50%;
   font-size: large;
   }
 /* CHANGE PASSWORD */

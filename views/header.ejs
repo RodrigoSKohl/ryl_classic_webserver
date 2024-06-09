@@ -7,9 +7,14 @@
     <div class="nav" id="nav">
       <ul>
         <li><a href="/"  class="<%= currentPage === 'index' ? 'active' : '' %>">Homepage</a></li>
-        <li><a href="/register" class="<%= currentPage === 'register' ? 'active' : '' %>">Create Account</a></li>
+        
+        <li><a href="/login" class="<%= currentPage === 'login' ? 'active' : '' %>">Login</a>
+        <ul class="submenu">
+          <li><a href="/register" class="<%= currentPage === 'register' ? 'active' : '' %>">Register</a></li>
+          <li><a href="/forgot-password" class="<%= currentPage === 'forgot-password' ? 'active' : '' %>">Recovery</a></li>
+      </ul>
+    </li>
         <li><a href="<%= downloadURL %>" target="_blank">Download</a></li>
-        <li><a href="/forgot-password"  class="<%= currentPage === 'forgot-password' ? 'active' : '' %>">Recovery</a></li>
       </ul>
     </div>
     <div class="menu-toggle" id="menu-toggle">&#9776;</div>

@@ -28,6 +28,20 @@ async function checkExistingUser(username, pool, mssql, dbTable) {
   }
 
 
+  // Função para verificar se a senha coincide com a senha armazenada no banco de dados
+  async function checkExistingPassword(senha, pool, mssql, dbTable) {
+    const result = await pool.request()
+      .input('passwd', mssql.VarChar(30), senha)
+      .query(`
+        SELECT TOP 1 1
+        FROM ${dbTable}
+        WHERE passwd = @paswd
+      `);
+  
+    return result.recordset.length > 0;
+  }
+
+
   // Função para executar uma transação
 function transaction(pool, body) {
   const transaction = new mssql.Transaction(pool);
@@ -54,5 +68,6 @@ function transaction(pool, body) {
   module.exports = {
     checkExistingUser,
     checkExistingEmail,
+    checkExistingPassword,
     transaction,
   };

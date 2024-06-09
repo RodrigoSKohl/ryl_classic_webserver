@@ -28,12 +28,14 @@ const forgotPassword = require('./routes/forgotPassword');
 const forgotPasswordAPI = require('./routes/api/forgotPassword');
 const changePassword = require('./routes/changePassword');
 const changePasswordAPI = require('./routes/api/changePassword');
+const login = require('./routes/login');
 const corsMiddleware = require('./middlewares/corsMiddleware');
 const limiter = require('./middlewares/limiter');
 const csrfProtect = require('./middlewares/csrfProtect');
 
 app.use(limiter, corsMiddleware);
 app.use('/', index);
+app.use('/',csrfProtect, login);
 app.use('/', csrfProtect, register, registerAPI);
 app.use('/', confirmEmail);
 app.use('/', csrfProtect, forgotPassword, forgotPasswordAPI);
