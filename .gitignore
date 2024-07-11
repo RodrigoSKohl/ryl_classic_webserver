@@ -7,6 +7,6 @@ certificate/
 !certificate/server-chain.pem
 !certificate/ssl_password.txt
 nginx/*
-!nginx/nginx.conf
+!nginx/conf/nginx.conf
 # Ignorar arquivo .env
 .env
