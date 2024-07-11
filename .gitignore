@@ -2,6 +2,10 @@
 node_modules/
 package-lock.json
 certificate/
-nginx/
+!certificate/server-cert.pem
+!certificate/server-key.pem
+!certificate/server-chain.pem
+nginx/*
+!nginx/nginx.conf
 # Ignorar arquivo .env
 .env

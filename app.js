@@ -4,7 +4,7 @@ const session = require('express-session');
 const crypto = require('crypto');
 const expressLayouts = require('express-ejs-layouts');
 const path = require('path');
-const { downloadURL, discordInvite } = require('./utils/constants');
+const { downloadURL, discordInvite, patchURL } = require('./utils/constants');
 
 // Setup Express
 const app = express();
@@ -15,6 +15,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.set('trust proxy', true);
 app.locals.downloadURL = downloadURL;
 app.locals.discordInvite = discordInvite;
+app.locals.patchURL = patchURL;
 app.set('view engine', 'ejs');
 app.set('layout', 'layout');
 app.use(expressLayouts);
@@ -29,13 +30,14 @@ const forgotPasswordAPI = require('./routes/api/forgotPassword');
 const changePassword = require('./routes/changePassword');
 const changePasswordAPI = require('./routes/api/changePassword');
 const login = require('./routes/login');
+const loginAPI = require('./routes/api/login');
 const corsMiddleware = require('./middlewares/corsMiddleware');
 const limiter = require('./middlewares/limiter');
 const csrfProtect = require('./middlewares/csrfProtect');
 
 app.use(limiter, corsMiddleware);
 app.use('/', index);
-app.use('/',csrfProtect, login);
+app.use('/',csrfProtect, login, loginAPI);
 app.use('/', csrfProtect, register, registerAPI);
 app.use('/', confirmEmail);
 app.use('/', csrfProtect, forgotPassword, forgotPasswordAPI);
